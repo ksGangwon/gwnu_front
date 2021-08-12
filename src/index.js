@@ -1,18 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import {HashRouter} from 'react-router-dom';
-// import App from './App';
-import Gnb from "./pages/Gnb";
-import Body from "./pages/Body";
-import Fnb from "./pages/Fnb";
+import App from './App';
 
 ReactDOM.render(
-  <HashRouter>
-    <Gnb/>
-    <Body/>
-    <Fnb/>
-  </HashRouter>,
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
