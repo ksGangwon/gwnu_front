@@ -6,12 +6,12 @@ class Fnb extends Component{
             <div className="fnbContainer">
                 <div className="popupContainer">
                     <div className="popup">
-                        <div className="popupImg"><img src="images/popup/banner1.png"/></div>
-                        <div className="popupImg"><img src="images/popup/banner2.png"/></div>
-                        <div className="popupImg"><img src="images/popup/banner3.png"/></div>
-                        <div className="popupImg"><img src="images/popup/banner4.png"/></div>
-                        <div className="popupImg"><img src="images/popup/banner5.png"/></div>
-                        <div className="popupImg"><img src="images/popup/banner6.png"/></div>
+                        <div className="popupImg"><img src="images/popup/banner1.png" alt="배너사진"/></div>
+                        <div className="popupImg"><img src="images/popup/banner2.png" alt="배너사진"/></div>
+                        <div className="popupImg"><img src="images/popup/banner3.png" alt="배너사진"/></div>
+                        <div className="popupImg"><img src="images/popup/banner4.png" alt="배너사진"/></div>
+                        <div className="popupImg"><img src="images/popup/banner5.png" alt="배너사진"/></div>
+                        <div className="popupImg"><img src="images/popup/banner6.png" alt="배너사진"/></div>
                     </div>
                 </div>
 

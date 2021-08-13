@@ -1,23 +1,23 @@
 .fnbContainer{
     background-color: #FEFAF6;
 }
-.popupContainer{
-    width: 1300px;
-    margin: 0 auto;
-    overflow: hidden;
-}
 
+.popupContainer{
+    width: 100%;
+}
 .popup{
     width: 1300px;
-    margin: 0 auto;
+    margin: 10px auto;
     display: flex;
     overflow: hidden;
     flex-direction:row;
     justify-content:space-around;
 }
 #popupImg{
+    line-height: 60px;
     overflow: hidden;
 }
+
 
 .footerContainer{
     overflow: hidden;
