@@ -8,6 +8,7 @@ class App extends Component {
     return (
       <div className="bodyContainer">
           <Gnb />
+          <Body />
           <Fnb />
       </div>
     );

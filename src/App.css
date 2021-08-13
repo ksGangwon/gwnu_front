@@ -12,14 +12,9 @@ li{
   list-style: none;
 }
 
-#root{
+.bodyContainer{
   width: 100%;
   height: 100%;
-  margin: 10px 0;
-}
-
-.bodyContainer{
-  width: 1300px;
   margin: 0 auto;
 }
 

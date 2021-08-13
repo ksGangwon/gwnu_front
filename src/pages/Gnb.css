@@ -1,4 +1,6 @@
 .gnbContainer{
+    width: 1300px;
+    margin: 0 auto;
     position: relative;
     height: 75px;
 }
@@ -25,6 +27,7 @@
     z-index: 3;
     border-radius: 5px;
     border: #2B2A29 solid 1px;
+    background-color: white;
 }
 
 .gnbHiddenUi li{
@@ -44,7 +47,7 @@
     position: absolute;
     width: 30px;
     height: 20px;
-    top: -14px;
+    top: -20px;
     left:54px;
 }
 #hiddenUi2{
@@ -56,7 +59,7 @@
     position: absolute;
     width: 30px;
     height: 20px;
-    top: -14px;
+    top: -20px;
     left:80px;
 }
 #hiddenUi3{
@@ -68,7 +71,7 @@
     position: absolute;
     width: 30px;
     height: 20px;
-    top: -14px;
+    top: -20px;
     left:75px;
 }
 #hiddenUi4{
@@ -80,7 +83,7 @@
     position: absolute;
     width: 30px;
     height: 20px;
-    top: -14px;
+    top: -20px;
     left:62px;
 }
 
