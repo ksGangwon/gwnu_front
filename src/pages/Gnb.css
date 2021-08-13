@@ -1,0 +1,115 @@
+.gnbContainer{
+    width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    height: 75px;
+}
+.gnbContainer img{
+    width: 250px;
+    height: 75px;
+}
+
+.gnbMenu{
+    margin-right: 100px;
+    line-height: 75px;
+    float: right;
+    display: flex;
+    justify-content: space-around;
+}
+.gnbMenuList{
+    margin:0 40px;
+    font-weight: 500;
+}
+
+.gnbHiddenUi{
+    position: absolute;
+    display: none;
+    z-index: 5;
+    border-radius: 5px;
+    border: #2B2A29 solid 1px;
+    background-color: white;
+}
+
+.gnbHiddenUi li{
+    font-size: 13px;
+    text-align: center;
+    height: 55px;
+    line-height: 55px;
+}
+
+
+/*개별 위치 조정*/
+#hiddenUi1{
+    top: 75px;
+    left: 520px;
+    width: 130px;
+}
+#hiddenUi1 img{
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    top: -20px;
+    left:54px;
+}
+#hiddenUi2{
+    top: 75px;
+    left: 675px;
+    width: 180px;
+}
+#hiddenUi2 img{
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    top: -20px;
+    left:80px;
+}
+#hiddenUi3{
+    top: 75px;
+    left: 875px;
+    width: 180px;
+}
+#hiddenUi3 img{
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    top: -20px;
+    left:75px;
+}
+#hiddenUi4{
+    top: 75px;
+    left: 1055px;
+    width: 150px;
+}
+#hiddenUi4 img{
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    top: -20px;
+    left:62px;
+}
+
+
+
+/*hover */
+.gnbMenuList>a:hover{
+    color: #03A396;
+}
+.gnbMenuList:hover #hiddenUi1{    
+    display: block;
+}
+.gnbMenuList:hover #hiddenUi2{    
+    display: block;
+}
+.gnbMenuList:hover #hiddenUi3{    
+    display: block;
+}
+.gnbMenuList:hover #hiddenUi4{    
+    display: block;
+}
+
+.gnbHiddenUi li:hover{
+    background-color: #03A396;
+    border-radius: 3px;
+    font-weight: 900;
+    color: #FEFAF6;
+}

@@ -1,0 +1,124 @@
+/*배경화면*/
+.mainImgSlide{
+    z-index: 1;
+    height: 500px;
+    overflow: hidden;
+}
+.mainImgSlide img{
+    width: 100%;
+    top:200px;
+}
+.swiper-button-prev{
+    top: 250px;
+}
+.swiper-button-next{
+    top:250px;
+}
+.swiper-pagination{
+    top: 380px;
+}
+
+/*공지사항 & 보도자료*/
+.noticeContainer{
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    margin:-80px 0 0 0;
+}
+.noticeBox{
+    display: grid;
+    grid-template-columns: 5fr 5fr;
+    background-color: rgb(255, 255, 255);
+    margin: 0 auto;
+    grid-gap: 50px;
+    width: 1300px;
+    border-radius: 30px;
+    height: 350px;
+}
+.notice{
+    margin: 0 auto;
+    width: 90%;
+}
+.noticeTitle{
+    font-family: "S-CoreDream-3Light";
+    border-bottom: #2B2A29 solid 2px;
+}
+.noticeTitle h4{
+    display: inline-block;
+    font-size: 21px;
+    margin:30px 0 10px 20px;
+}
+.noticeTitle h3{
+    display:block;
+    float: right;
+    margin:30px 20px 10px 0;
+    font-size:21px;
+}
+.noticeUi{
+    position: relative;
+    font-family: "S-CoreDream-2ExtraLight";
+    width: 100%;
+}
+.noticeLi{
+    height: 40px;
+    border-bottom: solid gray 0.5px;
+    margin: 20px 0 20px 0;
+}
+.noticeLi p {
+    float: left;
+    margin-left: 10px;
+    width: 60%;
+    font-size: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #2B2A29;
+}
+.noticeLi span {
+    float: right;
+    margin-right: 10px;
+}
+/*사진 갤러리*/
+.galleryContainer{
+    position: relative;
+    background-color: #2B2A29;
+    height: 500px;
+}
+.galleryBox{
+    width: 1300px;
+    margin: 0 auto;
+   
+}
+.galleryBox h1{
+    padding: 30px 0 25px 0;
+    text-align: center;
+    font-family: 'S-CoreDream-9Black';
+    color:#FEFAF6;
+}
+.galleryBox h4{
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'S-CoreDream-2ExtraLight';
+    color:#FEFAF6;
+}
+
+.galleryBox img{
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+
+/* 오류시 적용
+.galleryImgSlideContainer{
+    width: 1300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+    height: 400px;
+}
+.galleryImgSlide{
+    display:grid;
+    grid-template-columns: repeat(8, 1fr);
+}*/
