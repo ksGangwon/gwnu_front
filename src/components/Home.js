@@ -64,7 +64,7 @@ class Home extends Component {
                       <h4>공지사항</h4>
                       <a href="/"><h3>+</h3></a>
                   </div>
-                  <ui className="noticeUi">
+                  <div className="noticeUi">
                     <li className="noticeLi">
                       <a>
                         <p>공지사항</p>
@@ -77,19 +77,19 @@ class Home extends Component {
                         <span>2021-08-13</span>
                       </a>
                     </li> 
-                  </ui>
+                  </div>
               </div>
 
               <div className="notice">
                   <div className="noticeTitle">
                       <h4>보도자료</h4>
                   </div>
-                  <ui className="noticeUi">
+                  <div className="noticeUi">
                       <li className="noticeLi">
                           <a><p>보도자료</p>
                           <span>날짜</span></a>
                         </li>
-                  </ui>
+                  </div>
               </div>
               </div>
           </div>
