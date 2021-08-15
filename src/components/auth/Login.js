@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 import loginRequest from "../../lib/LoginRequest";
+import $ from "jquery";
+import {} from "jquery.cookie";
 
 class LoginForm extends Component {
 
   constructor(props) {
     super(props);
-  } 
+  }
+  componentDidMount(){
+    if($.cookie("loginData")){
+      alert("저장된 아이디가 있습니다")
+      this.props.history.push('/')
+    }
+  }
 
   login = () => {
     const loginId = this.loginId.value;
@@ -25,8 +33,11 @@ class LoginForm extends Component {
     const resultLogin = loginRequest.getLogin(loginId, loginPw)
 
     resultLogin.then(result=>{
-        if(result.message){
+        if(result.user){
+          $.cookie("loginData", result.user, { expires: 1 });
           this.props.history.push('/')
+        } else{
+          alert(result.message)
         }
       }
     )
