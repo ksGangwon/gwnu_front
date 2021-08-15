@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import './Gnb.css'
+import { NavLink } from "react-router-dom";
+
 class Gnb extends Component{
     render(){
         return(
@@ -10,7 +12,7 @@ class Gnb extends Component{
                     <a htef="/">융합원 소개</a>
                     <ui className="gnbHiddenUi"  id="hiddenUi1">
                         <img src="images/high_arrow.png"/>
-                        <a href="/"><li>인사말</li></a>
+                        <NavLink to={{pathname: "/Introduce"}}><li>인사말</li></NavLink>
                         <a href="/"><li>사업소개</li></a>
                         <a href="/"><li>주요연혁</li></a>
                         <a href="/"><li>조직도</li></a>

@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
+import loginRequest from "../../lib/LoginRequest";
 
 class LoginForm extends Component {
 
+  constructor(props) {
+    super(props);
+  } 
+
   login = () => {
-    const loginEmail = this.loginEmail.value;
+    const loginId = this.loginId.value;
     const loginPw = this.loginPw.value;
 
-    if (loginEmail === "" || loginEmail === undefined) {
+    if (loginId === "" || loginId === undefined) {
       alert("아이디를 입력해주세요.");
       this.loginEmail.focus();
       return;
@@ -17,7 +22,17 @@ class LoginForm extends Component {
       return;
     }
 
+    const resultLogin = loginRequest.getLogin(loginId, loginPw)
+
+    resultLogin.then(result=>{
+        if(result.message){
+          this.props.history.push('/')
+        }
+      }
+    )
+
   };
+  
   render() {
     const formStyle = {
       margin: 50
@@ -28,20 +43,19 @@ class LoginForm extends Component {
 
     return (
       <Form style={formStyle}>
+        <h2 className="LoginHeader"> 관리자 로그인 </h2>
         <Form.Group controlId="loginForm">
-          <Form.Label>아이디</Form.Label>
           <Form.Control
-            type="email"
+            type="id"
             maxLength="100"
-            ref={ref => (this.loginEmail = ref)}
-            placeholder="아이디를 입력하세요"
+            ref={ref => (this.loginId = ref)}
+            placeholder="아이디"
           />
-          <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
             maxLength="20"
             ref={ref => (this.loginPw = ref)}
-            placeholder="비밀번호를 입력하세요"
+            placeholder="비밀번호"
           />
           <Button
             style={buttonStyle}
@@ -54,6 +68,7 @@ class LoginForm extends Component {
           </Button>
         </Form.Group>
       </Form>
+      
     );
   }
 }
