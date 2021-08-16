@@ -1,51 +1,10 @@
 import React, {Component} from 'react';
 import './Gnb.css'
 import { NavLink } from "react-router-dom";
-import loginRequest from "../lib/LoginRequest";
-import $ from "jquery";
-import {} from "jquery.cookie";
 
 class Gnb extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            buttonDisplay: "none"
-          };
-      }
-
-    componentDidMount(){
-        if ($.cookie("loginData")) {
-            this.setState({
-              buttonDisplay: "block"
-            });
-          } else {
-            this.setState({
-              buttonDisplay: "none"
-            });
-          }
-      }
-
-      logout = () => {
-        const resultLogout = loginRequest.getLogout()
-
-        resultLogout.then(result=>{
-            console.log(result.message)
-            if(result.message){
-                alert("로그아웃 되었습니다")
-                $.removeCookie("loginData");
-                window.location.href = "/";
-            } else{
-                alert("로그아웃에 실패했습니다")
-            }
-        }
-        )
-    };
 
     render(){
-        const buttonStyle = {
-            
-            display: this.state.buttonDisplay
-          };
         
         return(
         <div className="gnbContainer">
@@ -93,9 +52,6 @@ class Gnb extends Component{
                         <a href="/"><li>자료실</li></a>
                     </div>
                 </div>
-                <button className="logoutBtn" style={buttonStyle} onClick={this.logout}>
-                    로그아웃
-                </button>
             </div>
         </div>
         )

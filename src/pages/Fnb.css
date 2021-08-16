@@ -39,3 +39,12 @@
     color: #FEFAF6;
     margin-top:5px;
 }
+
+.logoutBtn{
+    background-color: #84a89e;
+    color: #dbd1c7;
+    margin:0
+}
+.logoutBtn:hover{
+    color: #03A396;
+}

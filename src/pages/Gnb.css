@@ -48,7 +48,7 @@
 /*개별 위치 조정*/
 #hiddenUi1{
     top: 75px;
-    left: 390px;
+    left: 520px;
     width: 130px;
 }
 #hiddenUi1 img{
@@ -60,7 +60,7 @@
 }
 #hiddenUi2{
     top: 75px;
-    left: 545px;
+    left: 675px;
     width: 180px;
 }
 #hiddenUi2 img{
@@ -72,7 +72,7 @@
 }
 #hiddenUi3{
     top: 75px;
-    left: 745px;
+    left: 875px;
     width: 180px;
 }
 #hiddenUi3 img{
@@ -84,7 +84,7 @@
 }
 #hiddenUi4{
     top: 75px;
-    left: 925px;
+    left: 1055px;
     width: 150px;
 }
 #hiddenUi4 img{
@@ -117,7 +117,4 @@
     border-radius: 3px;
     font-weight: 900;
     color: #FEFAF6;
-}
-.logoutBtn:hover{
-    color: #03A396;
 }
