@@ -14,7 +14,6 @@ class Gnb extends Component{
       }
 
     componentDidMount(){
-        console.log("ㅇㅇ"+$.cookie("loginData"))
         if ($.cookie("loginData")) {
             this.setState({
               buttonDisplay: "block"
@@ -44,7 +43,7 @@ class Gnb extends Component{
 
     render(){
         const buttonStyle = {
-            margin: "0px 5px 0px 10px",
+            
             display: this.state.buttonDisplay
           };
         
@@ -94,7 +93,7 @@ class Gnb extends Component{
                         <a href="/"><li>자료실</li></a>
                     </div>
                 </div>
-                <button style={buttonStyle} onClick={this.logout} variant="dark">
+                <button className="logoutBtn" style={buttonStyle} onClick={this.logout}>
                     로그아웃
                 </button>
             </div>
