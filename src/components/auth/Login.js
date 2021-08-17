@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './Login.css'
 import { Form, Button } from "react-bootstrap";
 import loginRequest from "../../lib/LoginRequest";
 import $ from "jquery";
@@ -9,12 +10,12 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount(){
-    if($.cookie("loginData")){
-      alert("저장된 아이디가 있습니다")
-      this.props.history.push('/')
-    }
-  }
+  // componentDidMount(){
+  //   if($.cookie("loginData")){
+  //     alert("이미 관리자가 로그인중입니다!")
+  //     window.location.href = "/";
+  //   }
+  // }
 
   login = () => {
     const loginId = this.loginId.value;
@@ -35,7 +36,7 @@ class LoginForm extends Component {
     resultLogin.then(result=>{
         if(result.user){
           $.cookie("loginData", result.user, { expires: 1 });
-          this.props.history.push('/')
+          window.location.href = "/";
         } else{
           alert(result.message)
         }
@@ -45,41 +46,41 @@ class LoginForm extends Component {
   };
   
   render() {
-    const formStyle = {
-      margin: 50
-    };
-    const buttonStyle = {
-      marginTop: 10
-    };
-
     return (
-      <Form style={formStyle}>
-        <h2 className="LoginHeader"> 관리자 로그인 </h2>
-        <Form.Group controlId="loginForm">
-          <Form.Control
-            type="id"
-            maxLength="100"
-            ref={ref => (this.loginId = ref)}
-            placeholder="아이디"
-          />
-          <Form.Control
-            type="password"
-            maxLength="20"
-            ref={ref => (this.loginPw = ref)}
-            placeholder="비밀번호"
-          />
-          <Button
-            style={buttonStyle}
-            onClick={this.login}
-            variant="info"
-            type="button"
-            block
-          >
-            로그인
-          </Button>
-        </Form.Group>
-      </Form>
-      
+      <div className="contentContainer">
+        <div className="content">
+          <div className="contentLogin">
+            <Form className="contentLogin">
+              <h1> 관리자 로그인 </h1>
+              <Form.Group controlId="loginForm">
+                <Form.Control
+                  className="loginInput"
+                  type="id"
+                  maxLength="20"
+                  ref={ref => (this.loginId = ref)}
+                  placeholder="아이디"
+                />
+                <Form.Control
+                  className="loginInput"
+                  type="password"
+                  maxLength="20"
+                  ref={ref => (this.loginPw = ref)}
+                  placeholder="비밀번호"
+                />
+                <Button
+                  className="loginBtn"
+                  onClick={this.login}
+                  variant="info"
+                  type="button"
+                  block
+                >
+                  로그인
+                </Button>
+              </Form.Group>
+            </Form>
+          </div>
+        </div>  
+      </div>
     );
   }
 }

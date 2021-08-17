@@ -37,6 +37,13 @@
     line-height: 55px;
 }
 
+.logoutBtn{
+    margin:0 40px;
+    font-size: 15px;
+    font-weight: 500;
+    background-color: white;
+    border:0px;
+}
 
 /*개별 위치 조정*/
 #hiddenUi1{
@@ -87,8 +94,6 @@
     top: -20px;
     left:62px;
 }
-
-
 
 /*hover */
 .gnbMenuList>a:hover{
