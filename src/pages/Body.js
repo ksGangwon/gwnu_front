@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import Login from "../components/auth/Login";
 import Home from "../components/Home";
 import DetailPage from "../components/DetailPage";
-import Business from '../components/Business';
-import Convergence from '../components/Convergence';
-import introduce from '../components/Introduce';
 import NoticeMain from '../components/NoticeMain';
 import NoticeArchive from '../components/NoticeArchive';
 import NoticeEdu from '../components/NoticeEdu';
@@ -23,9 +20,6 @@ class Body extends Component {
             <Route path='/page' component={DetailPage}/>
         </Switch>
         <Route path="/Login" component={Login}></Route>
-        <Route path="/Business" component={Business}></Route>
-        <Route path="/Convergence" component={Convergence}></Route>
-        <Route path="/Introduce" component={introduce}></Route>
         <Route path="/NoticeMain" component={NoticeMain}></Route>
         <Route path="/NoticeArchive" component={NoticeArchive}></Route>
         <Route path="/NoticeEdu" component={NoticeEdu}></Route>
