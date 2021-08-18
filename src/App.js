@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import './App.css';
 import Gnb from './pages/Gnb';
 import Fnb from './pages/Fnb';
-import Body from './pages/Body';
-import DetailPage from './pages/DetailPage';
+import { Body, DetailPage } from './pages';
+import {Route, Switch} from 'react-router-dom';
 class App extends Component {
-  state = {
-    main:false
-  }
   render() {
     return (
       <div className="bodyContainer">
           <Gnb />
-          {this.state.main ? <Body /> : <DetailPage />}
+          <Route exact path='/' component={Body} />       
+          <Switch>
+            <Route path="/page/:detail/:number" component={DetailPage} />
+            <Route path='/page' component={DetailPage}/>
+          </Switch>
           <Fnb />
       </div>
     );

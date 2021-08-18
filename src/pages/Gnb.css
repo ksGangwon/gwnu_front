@@ -30,7 +30,7 @@
     background-color: white;
 }
 
-.gnbHiddenUi li{
+.gnbHiddenUi p{
     font-size: 13px;
     text-align: center;
     height: 55px;
@@ -107,7 +107,7 @@
     display: block;
 }
 
-.gnbHiddenUi li:hover{
+.gnbHiddenUi p:hover{
     background-color: #03A396;
     border-radius: 3px;
     font-weight: 900;
