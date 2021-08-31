@@ -1,0 +1,58 @@
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+}
+.fileModal {
+    width: 540px;
+    height: 621px;
+    background-color: white;
+    position: relative;
+    box-sizing: border-box;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    z-index:1001;
+}
+.close {
+    float: right;
+    font-size: 25px;
+  }
+.modalContents {
+    margin: 20 auto;
+    width: 100%;
+    position: relative;
+    padding: 0 20px 32px ;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.modalHeader {
+    margin: 20 auto;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-bottom: 1px solid #e8e8e8;
+}
+.fileContents{
+    margin-top: 15px;
+}
+.removeBtn{
+    background-color: white;
+    color:gray;
+    border:0
+}
+.removeBtn:hover{
+    background-color: white;
+    color:gray;
+    border-bottom:  #e8e8e8 solid 1px;
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 0px;
+}
