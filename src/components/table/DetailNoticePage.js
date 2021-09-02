@@ -11,6 +11,13 @@ const DetailNoticePage = () => {
   useEffect(()=>{
     const resultBoard = postRequest.getPost();
 
+    resultBoard.then(result=>{
+      if(result.board){
+        setPosts(result.board)
+      } else{
+        alert(result.message)
+      }
+    })
   },[])
 
   const postInform = posts.map((post)=>{
@@ -25,13 +32,7 @@ const DetailNoticePage = () => {
   return (
     <>
       <CommonTable headersName={['글번호', '제목', '등록일', '글쓴이','조회수']}>
-        <CommonTableRow>
-          <CommonTableColumn>1</CommonTableColumn>
-          <CommonTableColumn>첫번째 게시글입니다.</CommonTableColumn>
-          <CommonTableColumn>2020-10-25</CommonTableColumn>
-          <CommonTableColumn>관리자</CommonTableColumn>
-          <CommonTableColumn>6</CommonTableColumn>
-        </CommonTableRow>
+        {postInform}
       </CommonTable>
     </>
   )

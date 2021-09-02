@@ -68,8 +68,7 @@ function uploadFile(writer, model, fileRepository, file) {
     })
     .then(() => {
       model.set('fileName',file.name)
-      // const fileElement = writer.createText("x");
-      // model.insertContent(fileElement);
+      model.set('fileData',file)
 
       model.document.fire("change:data",file.name)
       
@@ -80,6 +79,7 @@ function uploadFile(writer, model, fileRepository, file) {
 class Uploader extends Plugin {
   init() {
     const editor = this.editor;
+    const model = editor.model;
     editor.commands.add("fileUpload", new FileUploadCommand(editor));
 
     editor.ui.componentFactory.add("insertFileAndImage", (locale) => {
@@ -100,6 +100,8 @@ class Uploader extends Plugin {
 
         if (imagesToUpload.length) {
           editor.execute("imageUpload", { file: imagesToUpload });
+          model.set('fileData',imagesToUpload)
+          model.document.fire("change:data","imageLoad")
         }
 
         if (filesToUpload.length) {

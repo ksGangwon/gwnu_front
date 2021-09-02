@@ -26,6 +26,7 @@
 }
 .contentHeader button:hover{
     background-color:#12882c; 
+    cursor:pointer;
 }
 .clear{
     clear: both;
@@ -40,6 +41,7 @@
     font-size: 15px;
     width: 600px;
     float:left;
+    z-index: 2;
 }
 .addFile{
     width: 322px; 
@@ -62,6 +64,7 @@
     float:right;
     border:1px solid silver;
     color: grey;
+    cursor:pointer;
 }
 .titleInput{
     margin: 25px auto;

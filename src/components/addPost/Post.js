@@ -20,7 +20,9 @@ class Post extends Component{
             title: "",
             description:"",
             category:null,
+            selected:null,
             files:[],
+            filesData:[],
             filesCount:0,
             isModalOn: false,
           }; 
@@ -28,7 +30,8 @@ class Post extends Component{
 
     //use react-select
     handleCategory = (category) => {
-        this.setState({ category: category.value });
+        this.setState({ category });
+        this.setState({ selected:category.value });
         console.log(`Option selected:`, category);
       };
 
@@ -41,7 +44,7 @@ class Post extends Component{
         
         let value = editor.getData();
 
-        console.log(editor.editing.model.fileName)  
+        console.log(editor.editing.model.fileData)
 
         this.setState( {
             description: value
@@ -50,6 +53,7 @@ class Post extends Component{
         if(editor.editing.model.fileName!=undefined && this.state.files.indexOf(editor.editing.model.fileName)<0){
             this.setState({
                 files: this.state.files.concat(editor.editing.model.fileName),
+                filesData : this.state.filesData.concat(editor.editing.model.fileData),
                 filesCount : this.state.filesCount+1
             } );
         }
@@ -68,12 +72,17 @@ class Post extends Component{
           } else if(this.state.description === ""){
               alert("내용을 입력해주세요")
           }
+  
+        const resultFile = this.state.filesData.map(async(file)=>{
+            let awsFile = await postRequest.upload(file);
+            // return awsFile
+        })
+        const resultPost = postRequest.addPost(this.state.title, this.state.description, this.state.selected)
+        
 
-        const resultPost = postRequest.addPost(this.state.title, this.state.description, this.state.category, this.state.files)
         resultPost.then(result=>{
-            if(result.message){
-                alert("게시물이 추가되었습니다")
-                window.location.href = "/";
+            if(result.message){ 
+                console.log("게시물 작성 성공")
             } else {
                 alert("게시물 저장에 실패했습니다")
             }
@@ -95,7 +104,9 @@ class Post extends Component{
     };
     
     render(){
+        const { category } = this.state;
         return(
+
             <div className="contentContainer">
                 <div className="contentHeader">
                     <h1>관리자 글쓰기</h1>
@@ -108,7 +119,7 @@ class Post extends Component{
                     <div className="contentMain">
                         <Select
                             className="selectCategory"
-                            value={this.state.category}
+                            value={category}
                             placeholder={'카테고리를 선택하세요'}
                             onChange={this.handleCategory} 
                             options={options}/>
@@ -124,8 +135,10 @@ class Post extends Component{
                             onChange={this.handleEditorDataChange}
                         />
                     </div>
-                </div>
             </div>
+        </div>
+
+            
         )
     }
 }

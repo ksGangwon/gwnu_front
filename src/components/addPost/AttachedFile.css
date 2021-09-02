@@ -21,6 +21,7 @@
 .close {
     float: right;
     font-size: 25px;
+    cursor:pointer;
   }
 .modalContents {
     margin: 20 auto;
@@ -55,4 +56,5 @@
     border-left: 0px;
     border-right: 0px;
     border-top: 0px;
+    cursor:pointer;
 }
