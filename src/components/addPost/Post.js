@@ -23,10 +23,32 @@ class Post extends Component{
             selected:null,
             files:[],
             filesData:[],
+            urlArray:[],
             filesCount:0,
             isModalOn: false,
           }; 
       }
+
+    //게시물 등록 이벤트
+    componentDidUpdate(_prevProps,prevState){
+        if(prevState.urlArray.length != this.state.urlArray.length){
+            console.log("체크 1")
+            if(this.state.urlArray.length==this.state.urlArray.length){
+                console.log("체크 2")
+                console.log(this.state.urlArray)
+                const resultPost = postRequest.addPost(this.state.title, this.state.description, this.state.selected, this.state.files, this.state.urlArray)
+                    
+                resultPost.then(result=>{
+                    if(result.message){ 
+                        alert("게시물 작성 성공")
+                        window.location.href = "/";
+                    } else {
+                        alert("게시물 저장에 실패했습니다")
+                    }
+                }) 
+            }
+        }
+    }
 
     //use react-select
     handleCategory = (category) => {
@@ -44,7 +66,7 @@ class Post extends Component{
         
         let value = editor.getData();
 
-        console.log(editor.editing.model.fileData)
+        console.log(editor.editing.model.fileName)
 
         this.setState( {
             description: value
@@ -72,21 +94,30 @@ class Post extends Component{
           } else if(this.state.description === ""){
               alert("내용을 입력해주세요")
           }
-  
-        const resultFile = this.state.filesData.map(async(file)=>{
-            let awsFile = await postRequest.upload(file);
-            // return awsFile
-        })
-        const resultPost = postRequest.addPost(this.state.title, this.state.description, this.state.selected)
-        
 
-        resultPost.then(result=>{
-            if(result.message){ 
-                console.log("게시물 작성 성공")
-            } else {
-                alert("게시물 저장에 실패했습니다")
-            }
-        })  
+
+        if(this.state.files.length!=0){
+            const findFile = this.state.files.map(async (file)=>{
+                let listFile = await postRequest.findFile(file);
+                console.log(listFile)
+                if(listFile.fail){
+                    alert(file+"\n같은 이름의 파일이 서버에 존재합니다. 삭제 후, 파일 이름을 변경해 다시 업로드 해주세요.");
+                    this.setState({
+                        isModalOn: true,
+                    })
+                    document.body.style.overflow = "hidden"; 
+                } else{
+                    const resultFile = this.state.filesData.map(async(file)=>{
+                        let awsFile = await postRequest.upload(file);
+                        this.setState({
+                            urlArray: this.state.urlArray.concat(awsFile),
+                        })
+                    })
+                }
+            })
+
+        }        
+        
     };
 
     onModal = () => {

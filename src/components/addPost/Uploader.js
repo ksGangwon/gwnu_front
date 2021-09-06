@@ -100,8 +100,10 @@ class Uploader extends Plugin {
 
         if (imagesToUpload.length) {
           editor.execute("imageUpload", { file: imagesToUpload });
+          model.set('fileName',imagesToUpload[0].name)
           model.set('fileData',imagesToUpload)
           model.document.fire("change:data","imageLoad")
+          alert("이미지 파일이 첨부되었습니다")
         }
 
         if (filesToUpload.length) {
