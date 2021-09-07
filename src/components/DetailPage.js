@@ -33,7 +33,7 @@ class DetailPage extends Component {
                     <div className="contentBox">
                         <div className="contentHeader">
                             <h1>{functions.pageDetailName(detail, number)}</h1>
-                            <div className="contentHeaderText">작성자 강원산학융합본부</div>
+                            {/* <div className="contentHeaderText">작성자 강원산학융합본부</div> */}
                         </div>
                         <div className="content">
                             {functions.pageLoder(detail, number)}
