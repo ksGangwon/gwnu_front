@@ -5,6 +5,7 @@ import CommonTableRow from './CommonTableRow';
 import postRequest from "../../lib/PostRequest";
 import './DetailNoticePage.css';
 
+//test
 class DetailNoticePage extends Component {
 
   constructor(props) {
