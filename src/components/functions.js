@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import DetailNotice from './board/DetailNoticePage';
 
 export function pageLoder(detail, number)
 {
@@ -45,7 +46,18 @@ export function pageLoder(detail, number)
         }
     }
     else{
-        return "게시판";
+        switch (number){
+            case "1":
+                return <DetailNotice /> ;
+            case "2":
+                return <img src="/images/detail/사업소개.png" alt="사업소개"/>;
+            case "3":
+                return <h1>주요연혁</h1>;
+            case "4":
+                return <img src="/images/detail/조직도.png" alt="조직도"/>;
+            case "5":
+                return <h1>CI 소개</h1>;
+        }
     }
 }
 

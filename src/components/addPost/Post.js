@@ -32,10 +32,7 @@ class Post extends Component{
     //게시물 등록 이벤트
     componentDidUpdate(_prevProps,prevState){
         if(prevState.urlArray.length != this.state.urlArray.length){
-            console.log("체크 1")
             if(this.state.urlArray.length==this.state.urlArray.length){
-                console.log("체크 2")
-                console.log(this.state.urlArray)
                 const resultPost = postRequest.addPost(this.state.title, this.state.description, this.state.selected, this.state.files, this.state.urlArray)
                     
                 resultPost.then(result=>{
@@ -116,8 +113,18 @@ class Post extends Component{
                 }
             })
 
-        }        
-        
+        } else{
+            const resultPost = postRequest.addPost(this.state.title, this.state.description, this.state.selected, this.state.files, this.state.urlArray)
+                    
+            resultPost.then(result=>{
+                if(result.message){ 
+                    alert("게시물 작성 성공")
+                    window.location.href = "/";
+                } else {
+                    alert("게시물 저장에 실패했습니다")
+                }
+            })
+        } 
     };
 
     onModal = () => {

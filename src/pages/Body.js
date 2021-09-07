@@ -4,7 +4,7 @@ import Home from "../components/Home";
 import DetailPage from "../components/DetailPage";
 import Post from '../components/addPost/Post';
 import { Route, Switch } from "react-router-dom";
-import DetailNoticePage from "../components/table/DetailNoticePage";
+import DetailNoticePage from "../components/board/DetailNoticePage";
 
 class Body extends Component {
   render() {
