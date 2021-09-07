@@ -14,6 +14,7 @@ class DetailNoticePage extends Component {
         posts:[],
         pages:[],
         isClicked:1,
+        category:""
       }; 
   }
 
