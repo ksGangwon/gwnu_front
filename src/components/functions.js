@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import DetailNotice from './board/DetailNoticePage';
+import Notice from './board/NoticePage';
 
 export function pageLoder(detail, number)
 {
@@ -48,7 +48,7 @@ export function pageLoder(detail, number)
     else{
         switch (number){
             case "1":
-                return <DetailNotice /> ;
+                return <Notice /> ;
             case "2":
                 return <img src="/images/detail/사업소개.png" alt="사업소개"/>;
             case "3":

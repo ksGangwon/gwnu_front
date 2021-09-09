@@ -23,9 +23,16 @@ export async function upload(file){
 //게시글 불러오기
 export async function getPost(page,category){
     console.log('getPost함수 호출됨');
-    console.log("이건ㄴㄴ"+page)
     const postData = await instance.get("/board", {params:{page:page, category:category}});
     return postData.data;
+}
+
+//게시글 불러오기
+export async function getDetail(id){
+    console.log('getDetail함수 호출됨');
+    const postData = await instance.get(`/board/${id}`);
+    return postData.data;
+    
 }
 
 //같은 이름의 파일 업로드 방지
@@ -40,5 +47,6 @@ export default{
     addPost,
     getPost,
     upload,
-    findFile
+    findFile,
+    getDetail
 }

@@ -31,8 +31,8 @@ class Post extends Component{
 
     //게시물 등록 이벤트
     componentDidUpdate(_prevProps,prevState){
-        if(prevState.urlArray.length != this.state.urlArray.length){
-            if(this.state.urlArray.length==this.state.urlArray.length){
+        if(prevState.urlArray.length !== this.state.urlArray.length){
+            if(this.state.urlArray.length===this.state.files.length){
                 const resultPost = postRequest.addPost(this.state.title, this.state.description, this.state.selected, this.state.files, this.state.urlArray)
                     
                 resultPost.then(result=>{
@@ -69,7 +69,7 @@ class Post extends Component{
             description: value
         } );
 
-        if(editor.editing.model.fileName!=undefined && this.state.files.indexOf(editor.editing.model.fileName)<0){
+        if(editor.editing.model.fileName!==undefined && this.state.files.indexOf(editor.editing.model.fileName)<0){
             this.setState({
                 files: this.state.files.concat(editor.editing.model.fileName),
                 filesData : this.state.filesData.concat(editor.editing.model.fileData),
@@ -93,7 +93,7 @@ class Post extends Component{
           }
 
 
-        if(this.state.files.length!=0){
+        if(this.state.files.length!==0){
             const findFile = this.state.files.map(async (file)=>{
                 let listFile = await postRequest.findFile(file);
                 console.log(listFile)
@@ -112,6 +112,7 @@ class Post extends Component{
                     })
                 }
             })
+
 
         } else{
             const resultPost = postRequest.addPost(this.state.title, this.state.description, this.state.selected, this.state.files, this.state.urlArray)

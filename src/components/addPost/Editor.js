@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {  } from "react";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import DecoupledEditor from "@ckeditor/ckeditor5-editor-decoupled/src/decouplededitor";
 import Essentials from "@ckeditor/ckeditor5-essentials/src/essentials";

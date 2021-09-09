@@ -7,16 +7,6 @@ import {} from "jquery.cookie";
 
 class LoginForm extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-  // componentDidMount(){
-  //   if($.cookie("loginData")){
-  //     alert("이미 관리자가 로그인중입니다!")
-  //     window.location.href = "/";
-  //   }
-  // }
-
   login = () => {
     const loginId = this.loginId.value;
     const loginPw = this.loginPw.value;

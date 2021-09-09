@@ -6,7 +6,6 @@ import FileDialogButtonView from "@ckeditor/ckeditor5-upload/src/ui/filedialogbu
 import FileRepository from "@ckeditor/ckeditor5-upload/src/filerepository";
 import Notification from "@ckeditor/ckeditor5-ui/src/notification/notification";
 import Command from "@ckeditor/ckeditor5-core/src/command";
-import { findOptimalInsertionRange } from '@ckeditor/ckeditor5-widget/src/utils';
 
 const _UPLOAD_FILE_LIMIT = 50000000;
 
