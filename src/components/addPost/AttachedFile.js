@@ -23,7 +23,7 @@ class AttachedFile extends Component {
                 <div className="modalContents">
                   <h2 className="modalHeader">첨부파일</h2>
                   
-                  {files!=[]?(
+                  {files!==[]?(
                     files.map((file,index) => 
                     <div className="fileContents" key={index}>
                         {file}

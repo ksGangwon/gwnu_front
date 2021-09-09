@@ -1,155 +1,67 @@
 import React, { Component } from 'react';
-import CommonTable from './CommonTable';
-import CommonTableColumn from './CommonTableColumn';
-import CommonTableRow from './CommonTableRow';
 import postRequest from "../../lib/PostRequest";
-import './DetailNoticePage.css';
 
+// const PostContents = ({content}) =>{
+//   <div
+//     className="ck-content"
+//     dangerouslySetInnerHTML={{ __html: content }}
+//   ></div>
+// }
 //test
 class DetailNoticePage extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-        posts:[],
-        pages:[],
-        pageClicked:0,
-        categoryClicked:"all"
-      }; 
+      files:[],
+      datas:[],
+    }; 
   }
 
   componentDidMount(){
-    this.newLoad(this.state.pageClicked,this.state.categoryClicked);
-  }
+    const id = this.props.location.state.id
 
-
-  //카테고리 버튼 이벤트
-  categoryClick = (e) =>{
-    this.setState({categoryClicked:e.target.value});
-    this.setState({pages:[]})
-    this.newLoad(0,e.target.value);
-  }
-
-  //페이지 선택 이벤트
-  pageClick = (e) =>{
-    this.setState({pageClicked:e.target.value});
-    this.setState({posts:[]})
-
-    const resultBoard = postRequest.getPost(e.target.value,this.state.categoryClicked);
+    const resultBoard = postRequest.getDetail(id);
     resultBoard.then(result=>{
-      for(var i=0;i<result.length;i++){
-        this.setState({posts:this.state.posts.concat(result[i])})
-      }
+      this.setState({datas:this.state.datas.concat(result[0])})
+      this.setState({files:this.state.files.concat(result[1][0])})
     })
-  }
-
-  firstPage = () =>{
-    this.pageLoad(this.state.pages[0],0)
-  }
-
-  forwardPage = () =>{
-    this.pageLoad(this.state.pageClicked-1,0)
-  }
-
-  backPage = () =>{
-    var length = this.state.pages.length-1
-    this.pageLoad(this.state.pageClicked+1,this.state.pages[length])
-  }
-
-  finalPage = () =>{
-    var length = this.state.pages.length-1
-    this.pageLoad(this.state.pages[length],this.state.pages[length])
   }
   
-  newLoad = (page,category) =>{
-    const resultBoard = postRequest.getPost(page,category);
-    this.setState({pageClicked:0})
-    this.setState({posts:[]})
-
-    resultBoard.then(result=>{
-      var length = result.length;
-
-      if(result[0].number%10!=0){
-        var pageNum = parseInt(result[0].number / 10);
-      } else{
-        var pageNum = result[0].number / 10 - 1;
-      }
-
-      for(var i=0;i<length;i++){
-        this.setState({posts:this.state.posts.concat(result[i])})
-      }
-
-      for(var j=0; j<=pageNum; j++){
-        this.setState({pages:this.state.pages.concat(j)})
-        console.log(this.state.pages[j-1])
-      }
-      
-    })
-  }
-
-  pageLoad = (page,checkpage) =>{
-    if(this.state.pageClicked!=checkpage){
-      this.setState({pageClicked:page})
-      this.setState({posts:[]})
-
-      const resultBoard = postRequest.getPost(page,this.state.categoryClicked);
-      resultBoard.then(result=>{
-        for(var i=0;i<result.length;i++){
-          this.setState({posts:this.state.posts.concat(result[i])})
-        }
-      })
-    } else {
-      window.location.replace("/#/page/notion/1")
-    }
-  }
-
   render(){
-    const postInform = 
+    const fileInform=
     <>
-    {this.state.posts.length!=0?(this.state.posts.map((post)=>(
-      <CommonTableRow>
-        <CommonTableColumn key={post.number.toString()}>{post.number}</CommonTableColumn>
-        <CommonTableColumn key={post.category}>{post.category}</CommonTableColumn>
-        <CommonTableColumn key={post.title}>{post.title}</CommonTableColumn>
-        <CommonTableColumn key={post.date}>{post.date}</CommonTableColumn>
-        <CommonTableColumn key={post.description}>관리자</CommonTableColumn>
-        <CommonTableColumn key={post.inquiry}>{post.inquiry}</CommonTableColumn>
-      </CommonTableRow>))):
-      <CommonTableRow>
-        <CommonTableColumn></CommonTableColumn>
-        <CommonTableColumn></CommonTableColumn>
-        <CommonTableColumn></CommonTableColumn>
-        <CommonTableColumn>등록된 게시물이 없습니다.</CommonTableColumn>
-        <CommonTableColumn></CommonTableColumn>
-        <CommonTableColumn></CommonTableColumn>
-      </CommonTableRow>
-    }
+      {this.state.files.length!==0?(this.state.files.map((file)=>(
+        <div>
+          <div>첨부파일</div>
+          <a href={file.url} download>{file.originalname}</a>
+        </div>))):
+        <div>
+          <div>첨부파일</div>
+          <>없음</>
+        </div>
+      }
     </>
 
-    const pageInform=
-    <div className="bottomBtnList">
-      <button className="pageBtn" onClick={this.firstPage}>&lt; &lt; </button>
-      <button className="pageBtn" onClick={this.forwardPage}>&lt; </button>
-      {this.state.pages.map((page)=>(
-          <button className={this.state.pageClicked==page?"pageClick":"pageUnClick"} value={page.toString()} key={page.toString()} onClick={this.pageClick}>{page+1}</button>
-      ))}
-      <button className="pageBtn" onClick={this.backPage}>&gt; </button>
-      <button className="pageBtn" onClick={this.finalPage}>&gt; &gt; </button>
-    </div>
-
+    const postInform=
+    <>
+      {this.state.datas.length!==0?(this.state.datas.map((data)=>(
+          <div>
+            <div>{data.title}</div>
+            {fileInform}
+            <div><p>관리자</p><p>{data.date}</p>조회:{data.inquiry}</div>
+            <div>없음</div>
+            {/* <PostContents content={data.description}/> */}
+          </div>))):
+          <div>
+            Loading...
+          </div>
+        }
+    </>
     return(
       <>
-        <div className="categoryList">
-          <button className={this.state.categoryClicked=="all"?"categoryClick":"categoryUnClick"} value="all" onClick={this.categoryClick}>전체</button>
-          <button className={this.state.categoryClicked=="임의 카테고리1"?"categoryClick":"categoryUnClick"} value="임의 카테고리1" onClick={this.categoryClick}>카테고리1</button>
-          <button className={this.state.categoryClicked=="임의 카테고리2"?"categoryClick":"categoryUnClick"} value="임의 카테고리2" onClick={this.categoryClick}>카테고리2</button>
-          <button className={this.state.categoryClicked=="임의 카테고리3"?"categoryClick":"categoryUnClick"} value="임의 카테고리3" onClick={this.categoryClick}>카테고리3</button>
-        </div>
-        <CommonTable headersName={['번호', '분류', '제목', '등록일', '글쓴이','조회']}>
-          {postInform}
-        </CommonTable>
-        {pageInform}
-    </>
+        {postInform}
+      </>
     )
   }
 }
