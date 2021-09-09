@@ -13,36 +13,94 @@ class DetailNoticePage extends Component {
     this.state = {
         posts:[],
         pages:[],
-        isClicked:1,
-        category:""
+        pageClicked:0,
+        categoryClicked:"all"
       }; 
   }
 
   componentDidMount(){
-    const resultBoard = postRequest.getPost();
+    this.newLoad(this.state.pageClicked,this.state.categoryClicked);
+  }
+
+
+  //카테고리 버튼 이벤트
+  categoryClick = (e) =>{
+    this.setState({categoryClicked:e.target.value});
+    this.setState({pages:[]})
+    this.newLoad(0,e.target.value);
+  }
+
+  //페이지 선택 이벤트
+  pageClick = (e) =>{
+    this.setState({pageClicked:e.target.value});
+    this.setState({posts:[]})
+
+    const resultBoard = postRequest.getPost(e.target.value,this.state.categoryClicked);
+    resultBoard.then(result=>{
+      for(var i=0;i<result.length;i++){
+        this.setState({posts:this.state.posts.concat(result[i])})
+      }
+    })
+  }
+
+  firstPage = () =>{
+    this.pageLoad(this.state.pages[0],0)
+  }
+
+  forwardPage = () =>{
+    this.pageLoad(this.state.pageClicked-1,0)
+  }
+
+  backPage = () =>{
+    var length = this.state.pages.length-1
+    this.pageLoad(this.state.pageClicked+1,this.state.pages[length])
+  }
+
+  finalPage = () =>{
+    var length = this.state.pages.length-1
+    this.pageLoad(this.state.pages[length],this.state.pages[length])
+  }
+  
+  newLoad = (page,category) =>{
+    const resultBoard = postRequest.getPost(page,category);
+    this.setState({pageClicked:0})
+    this.setState({posts:[]})
 
     resultBoard.then(result=>{
       var length = result.length;
-      var pageNum = parseInt(length / 10)+1;
-      console.log(pageNum);
+
+      if(result[0].number%10!=0){
+        var pageNum = parseInt(result[0].number / 10);
+      } else{
+        var pageNum = result[0].number / 10 - 1;
+      }
 
       for(var i=0;i<length;i++){
         this.setState({posts:this.state.posts.concat(result[i])})
       }
 
-      for(var j=1; j<=pageNum; j++){
+      for(var j=0; j<=pageNum; j++){
         this.setState({pages:this.state.pages.concat(j)})
+        console.log(this.state.pages[j-1])
       }
       
     })
   }
 
-  categoryClick = (e) =>{
-    this.setState({isClicked:e.target.value})
-  }
+  pageLoad = (page,checkpage) =>{
+    if(this.state.pageClicked!=checkpage){
+      this.setState({pageClicked:page})
+      this.setState({posts:[]})
 
-  pageClick = (e) =>{
-    this.setState({isClicked:e.target.value})
+      const resultBoard = postRequest.getPost(page,this.state.categoryClicked);
+      resultBoard.then(result=>{
+        for(var i=0;i<result.length;i++){
+          this.setState({posts:this.state.posts.concat(result[i])})
+        }
+      })
+    } else {
+      window.location.replace("/#/page/notion/1")
+    }
   }
 
   render(){
@@ -70,22 +128,22 @@ class DetailNoticePage extends Component {
 
     const pageInform=
     <div className="bottomBtnList">
-      <button className="pageBtn">&lt; &lt; </button>
-      <button className="pageBtn">&lt; </button>
+      <button className="pageBtn" onClick={this.firstPage}>&lt; &lt; </button>
+      <button className="pageBtn" onClick={this.forwardPage}>&lt; </button>
       {this.state.pages.map((page)=>(
-          <button className={this.state.isClicked==page?"pageClick":"pageUnClick"} value={page.toString()} key={page.toString()} onClick={this.pageClick}>{page}</button>
+          <button className={this.state.pageClicked==page?"pageClick":"pageUnClick"} value={page.toString()} key={page.toString()} onClick={this.pageClick}>{page+1}</button>
       ))}
-      <button className="pageBtn">&gt; </button>
-      <button className="pageBtn">&gt; &gt; </button>
+      <button className="pageBtn" onClick={this.backPage}>&gt; </button>
+      <button className="pageBtn" onClick={this.finalPage}>&gt; &gt; </button>
     </div>
 
     return(
       <>
         <div className="categoryList">
-          <button className={this.state.isClicked==1?"categoryClick":"categoryUnClick"} value="1" onClick={this.categoryClick}>전체</button>
-          <button className={this.state.isClicked==2?"categoryClick":"categoryUnClick"} value="2" onClick={this.categoryClick}>카테고리1</button>
-          <button className={this.state.isClicked==3?"categoryClick":"categoryUnClick"} value="3" onClick={this.categoryClick}>카테고리2</button>
-          <button className={this.state.isClicked==4?"categoryClick":"categoryUnClick"} value="4" onClick={this.categoryClick}>카테고리3</button>
+          <button className={this.state.categoryClicked=="all"?"categoryClick":"categoryUnClick"} value="all" onClick={this.categoryClick}>전체</button>
+          <button className={this.state.categoryClicked=="임의 카테고리1"?"categoryClick":"categoryUnClick"} value="임의 카테고리1" onClick={this.categoryClick}>카테고리1</button>
+          <button className={this.state.categoryClicked=="임의 카테고리2"?"categoryClick":"categoryUnClick"} value="임의 카테고리2" onClick={this.categoryClick}>카테고리2</button>
+          <button className={this.state.categoryClicked=="임의 카테고리3"?"categoryClick":"categoryUnClick"} value="임의 카테고리3" onClick={this.categoryClick}>카테고리3</button>
         </div>
         <CommonTable headersName={['번호', '분류', '제목', '등록일', '글쓴이','조회']}>
           {postInform}

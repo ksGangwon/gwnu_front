@@ -36,9 +36,9 @@ class Post extends Component{
                 const resultPost = postRequest.addPost(this.state.title, this.state.description, this.state.selected, this.state.files, this.state.urlArray)
                     
                 resultPost.then(result=>{
-                    if(result.message){ 
+                    if(result){ 
                         alert("게시물 작성 성공")
-                        window.location.href = "/";
+                        window.location.replace("/#/page/notion/1")
                     } else {
                         alert("게시물 저장에 실패했습니다")
                     }
@@ -117,9 +117,10 @@ class Post extends Component{
             const resultPost = postRequest.addPost(this.state.title, this.state.description, this.state.selected, this.state.files, this.state.urlArray)
                     
             resultPost.then(result=>{
-                if(result.message){ 
+                console.log(result)
+                if(result){ 
                     alert("게시물 작성 성공")
-                    window.location.href = "/";
+                    window.location.replace("/#/page/notion/1")
                 } else {
                     alert("게시물 저장에 실패했습니다")
                 }
