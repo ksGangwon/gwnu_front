@@ -46,16 +46,14 @@ class Fnb extends Component{
             display: this.state.buttonDisplay
           };
         return(
-            <div className="fnbContainer">
-                <div className="popupContainer">
-                    <div className="popup">
-                        <div className="popupImg"><img src={process.env.PUBLIC_URL+'/images/popup/banner1.png'} alt="배너사진"/></div>
-                        <div className="popupImg"><img src={process.env.PUBLIC_URL+'/images/popup/banner2.png'} alt="배너사진"/></div>
-                        <div className="popupImg"><img src={process.env.PUBLIC_URL+'/images/popup/banner3.png'} alt="배너사진"/></div>
-                        <div className="popupImg"><img src={process.env.PUBLIC_URL+'/images/popup/banner4.png'} alt="배너사진"/></div>
-                        <div className="popupImg"><img src={process.env.PUBLIC_URL+'/images/popup/banner5.png'} alt="배너사진"/></div>
-                        <div className="popupImg"><img src={process.env.PUBLIC_URL+'/images/popup/banner6.png'} alt="배너사진"/></div>
-                    </div>
+            <div className="fnbContainer minMax">
+                <div className="popup ">
+                    <div className="popupImg"><img src={process.env.PUBLIC_URL+'/images/popup/banner1.png'} alt="배너사진"/></div>
+                    <div className="popupImg"><img src={process.env.PUBLIC_URL+'/images/popup/banner2.png'} alt="배너사진"/></div>
+                    <div className="popupImg"><img src={process.env.PUBLIC_URL+'/images/popup/banner3.png'} alt="배너사진"/></div>
+                    <div className="popupImg"><img src={process.env.PUBLIC_URL+'/images/popup/banner4.png'} alt="배너사진"/></div>
+                    <div className="popupImg"><img src={process.env.PUBLIC_URL+'/images/popup/banner5.png'} alt="배너사진"/></div>
+                    <div className="popupImg"><img src={process.env.PUBLIC_URL+'/images/popup/banner6.png'} alt="배너사진"/></div>
                 </div>
 
                 <div className="footerContainer">

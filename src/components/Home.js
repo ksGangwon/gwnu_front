@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import {Link} from 'react-router-dom';
 import SwiperCore, { Navigation, Pagination,Autoplay } from "swiper";
 //style
 import "swiper/swiper.scss";
@@ -44,7 +45,7 @@ class Home extends Component {
     }
     return (
       <div>
-        <div className="mainImgSlide">
+        <div className="mainImgSlide minMax">
           <Swiper
            {...swiperUp}
           >
@@ -57,58 +58,62 @@ class Home extends Component {
           </Swiper>
         </div>
         
-        <div className="noticeContainer">
+        <div className="noticeContainer minMax">
           <div className="noticeBox">
-              <div className="notice">
-                  <div className="noticeTitle">
-                      <h4>공지사항</h4>
-                      <a href="/"><h3>+</h3></a>
-                  </div>
-                  <div className="noticeUi">
-                    <li className="noticeLi">
-                      <a>
-                        <p>공지사항</p>
-                        <span>2021-08-13</span>
-                      </a>
-                    </li> 
-                    <li className="noticeLi">
-                      <a>
-                        <p>공지사항</p>
-                        <span>2021-08-13</span>
-                      </a>
-                    </li> 
-                  </div>
+            <div className="notice">
+              <div className="noticeTitle">
+                  <h4>공지사항</h4>
+                  <Link to="/page/notion/1"><h3>+</h3></Link>
               </div>
+              <div className="noticeUi">
+                <div className="noticeLi">
+                  <Link to="/page/notion/1">
+                    <p>공지사항</p>
+                    <span>2021-08-13</span>
+                  </Link>
+                </div> 
+                <div className="noticeLi">
+                  <Link to="/page/notion/1">
+                    <p>공지사항</p>
+                    <span>2021-08-13</span>
+                  </Link>
+                </div> 
+              </div>
+            </div>
 
               <div className="notice">
                   <div className="noticeTitle">
                       <h4>보도자료</h4>
+                      <Link to="/page/notion/3"><h3>+</h3></Link>
                   </div>
                   <div className="noticeUi">
-                      <li className="noticeLi">
-                          <a><p>보도자료</p>
-                          <span>날짜</span></a>
-                        </li>
+                    <div className="noticeLi">
+                      <Link to="/page/notion/3">
+                        <p>보도자료</p>
+                        <span>2021-08-13</span>
+                      </Link>
+                    </div> 
                   </div>
               </div>
+              <div className="clearBoth"></div>
               </div>
           </div>
-
+          
           {/*이미지 갤러리*/}
-          <div className="galleryContainer">
+          <div className="galleryContainer minMax">
             <div className="galleryBox">
                 <h1>GALLERY</h1>
                   <Swiper
                     {...swiperDown}
                   >
-                    <SwiperSlide><a><img src="images/picture/image01.png" alt="배경화면"/><h4>융합원 사진</h4></a></SwiperSlide>
-                    <SwiperSlide><a><img src="images/picture/image02.png" alt="배경화면"/><h4>융합원 사진</h4></a></SwiperSlide>
-                    <SwiperSlide><a><img src="images/picture/image03.png" alt="배경화면"/><h4>융합원 사진</h4></a></SwiperSlide>
-                    <SwiperSlide><a><img src="images/picture/image04.png" alt="배경화면"/><h4>융합원 사진</h4></a></SwiperSlide>
-                    <SwiperSlide><a><img src="images/picture/image05.png" alt="배경화면"/><h4>융합원 사진</h4></a></SwiperSlide>
-                    <SwiperSlide><a><img src="images/picture/image06.png" alt="배경화면"/><h4>융합원 사진</h4></a></SwiperSlide>
-                    <SwiperSlide><a><img src="images/picture/image07.png" alt="배경화면"/><h4>융합원 사진</h4></a></SwiperSlide>
-                    <SwiperSlide><a><img src="images/picture/image08.png" alt="배경화면"/><h4>융합원 사진</h4></a></SwiperSlide>
+                    <SwiperSlide><Link to="/page/notion/4"><div className="galleryImgBox"><div className="galleryTextBox"><h4>융합원 제목</h4><p>융합원 사진 내용</p></div></div><img src="images/picture/image01.png" alt="배경화면"/></Link></SwiperSlide>
+                    <SwiperSlide><Link to="/page/notion/4"><div className="galleryImgBox"><div className="galleryTextBox"><h4>융합원 제목</h4><p>융합원 사진 내용</p></div></div><img src="images/picture/image02.png" alt="배경화면"/></Link></SwiperSlide>
+                    <SwiperSlide><Link to="/page/notion/4"><div className="galleryImgBox"><div className="galleryTextBox"><h4>융합원 제목</h4><p>융합원 사진 내용</p></div></div><img src="images/picture/image03.png" alt="배경화면"/></Link></SwiperSlide>
+                    <SwiperSlide><Link to="/page/notion/4"><div className="galleryImgBox"><div className="galleryTextBox"><h4>융합원 제목</h4><p>융합원 사진 내용</p></div></div><img src="images/picture/image04.png" alt="배경화면"/></Link></SwiperSlide>
+                    <SwiperSlide><Link to="/page/notion/4"><div className="galleryImgBox"><div className="galleryTextBox"><h4>융합원 제목</h4><p>융합원 사진 내용</p></div></div><img src="images/picture/image05.png" alt="배경화면"/></Link></SwiperSlide>
+                    <SwiperSlide><Link to="/page/notion/4"><div className="galleryImgBox"><div className="galleryTextBox"><h4>융합원 제목</h4><p>융합원 사진 내용</p></div></div><img src="images/picture/image06.png" alt="배경화면"/></Link></SwiperSlide>
+                    <SwiperSlide><Link to="/page/notion/4"><div className="galleryImgBox"><div className="galleryTextBox"><h4>융합원 제목</h4><p>융합원 사진 내용</p></div></div><img src="images/picture/image07.png" alt="배경화면"/></Link></SwiperSlide>
+                    <SwiperSlide><Link to="/page/notion/4"><div className="galleryImgBox"><div className="galleryTextBox"><h4>융합원 제목</h4><p>융합원 사진 내용</p></div></div><img src="images/picture/image08.png" alt="배경화면"/></Link></SwiperSlide>
                   </Swiper>
             </div>
           </div>

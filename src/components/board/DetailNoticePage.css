@@ -89,3 +89,83 @@
     cursor: pointer;
   }
 
+
+  
+/*반응형 웹*/
+@media screen and (max-width : 992px) {
+
+  .commonTableHeaderColumn {
+    font-size: 14px;
+    padding: 8px 5px;
+  }
+   
+  .commonTableColumn {
+    padding: 8px 5px;
+    font-size: 13px;
+  }
+
+  .categoryClick{
+    margin-right: 13px;
+    font-size: 13px;
+  }
+  
+  .categoryUnClick{
+    margin-right: 13px;
+    font-size: 13px;
+  }
+
+  .pageBtn{
+    margin-top: 13px;
+    font-size: 13px;
+  }
+
+  .pageUnClick{
+    margin-top: 13px;
+    font-size: 13px;
+  }
+
+  .pageClick{
+    margin-top: 13px;
+    font-size: 13px;
+
+  }
+}
+
+@media screen and (max-width : 576px) {
+  .commonTableHeaderColumn {
+    font-size: 10px;
+    padding: 5px 5px;
+  }
+   
+  .commonTableColumn {
+    padding: 5px 5px;
+    font-size: 10px;
+  }
+
+  .categoryClick{
+    margin-right: 10px;
+    font-size: 10px;
+  }
+  
+  .categoryUnClick{
+    margin-right: 10px;
+    font-size: 10px;
+  }
+
+  .pageBtn{
+    margin-top: 10px;
+    font-size: 10px;
+  }
+
+  .pageUnClick{
+    margin-top: 10px;
+    font-size: 10px;
+  }
+
+  .pageClick{
+    margin-top: 10px;
+    font-size: 10px;
+
+  }
+}
+

@@ -1,0 +1,92 @@
+.contentIntroduce{
+ width: 1000px;
+ margin: 0 auto;
+ text-align: left;
+}
+
+.contentIntroduce h1{
+    font-size: 30px;
+    font-weight:900;
+}
+.contentIntroduce h6{
+    font-size: 25px;
+    margin: 20px 0;
+}
+.contentIntroduce h5{
+    text-align: right;
+    font-size: 25px;
+    margin: 20px 0;
+}
+.contentIntroduce p{
+    font-size: 22px;
+    padding: 15px 0;
+}
+.map{
+    width:"1200px";
+     height :"1200px";
+}
+
+
+
+/*반응형 웹*/
+@media screen and (max-width : 992px) {
+    .contentIntroduce{
+        width: 600px;
+        margin: 0 auto;
+        text-align: left;
+       }
+       
+       .contentIntroduce h1{
+           font-size: 20px;
+           font-weight:900;
+       }
+       .contentIntroduce h6{
+           font-size: 15px;
+           margin: 20px 0;
+       }
+       .contentIntroduce h5{
+           text-align: right;
+           font-size: 15px;
+           margin: 20px 0;
+       }
+       .contentIntroduce p{
+           font-size: 13px;
+           padding: 15px 0;
+       }
+       .content h1{
+           font-size: 25px;
+       }
+
+
+  }
+
+@media screen and (max-width : 576px) {
+  
+    .contentIntroduce{
+        width: 400px;
+        margin: 0 auto;
+        text-align: left;
+       }
+       
+       .contentIntroduce h1{
+           font-size: 15px;
+           font-weight:900;
+       }
+       .contentIntroduce h6{
+           font-size: 13px;
+           margin: 15px 0;
+       }
+       .contentIntroduce h5{
+           text-align: right;
+           font-size: 13px;
+           margin: 10px 0;
+       }
+       .contentIntroduce p{
+           font-size: 11px;
+           padding: 5px 0;
+       }
+       .content h1{
+        font-size: 20px;
+    }
+
+  }

@@ -1,0 +1,63 @@
+.noticeImages{
+    display: flex;
+    margin-left: -15px;
+    width: 100%;
+  }
+  .noticeImage{
+    padding-left:30px;
+    background-clip: padding-box;
+    
+  }
+  .noticeImage > div{
+    background: #FEFAF6;
+    margin-bottom: 30px;
+    padding: 3px 3px 5px 3px;
+    border: solid #2B2A29 1px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .noticeImage > div > img{
+   max-width: 100%;
+   border-radius: 10px;
+   
+  }
+  .noticeGallery p {
+    font-size: 1.5em;
+    margin-right: 30px;
+    text-align: right;
+  }
+
+
+  
+/*반응형 웹*/
+@media screen and (max-width : 992px) {
+  .noticeImages{
+    display: flex;
+    margin-left: -15px;
+    width: 100%;
+  }
+  .noticeImage{
+    background-clip: padding-box;
+    
+  }
+  .noticeImage > div{
+    background: #FEFAF6;
+    margin-bottom: 10px;
+    padding: 3px 3px 5px 3px;
+    border: solid #2B2A29 1px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .noticeGallery p {
+    font-size: 1.5em;
+    margin-right: 30px;
+    text-align: right;
+  }
+
+
+}
+
+@media screen and (max-width : 576px) {
+
+}

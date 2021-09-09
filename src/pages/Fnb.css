@@ -1,12 +1,9 @@
 .fnbContainer{
     background-color: #FEFAF6;
 }
-
-.popupContainer{
-    width: 100%;
-}
 .popup{
     width: 1300px;
+    height: 60px;
     margin: 0 auto;
     padding: 10px 0;
     display: flex;
@@ -14,14 +11,13 @@
     flex-direction:row;
     justify-content:space-around;
 }
-#popupImg{
-    line-height: 60px;
+.popupImg{
+    align-self: center;
     overflow: hidden;
 }
 
 
 .footerContainer{
-    overflow: hidden;
     background-color: #84a89e;
 }
 .footer{
@@ -48,3 +44,74 @@
 .logoutBtn:hover{
     color: #03A396;
 }
+
+
+
+/*반응형 웹*/
+@media screen and (max-width : 992px) {
+    .popup{
+        width: 800px;
+        height: 40px;
+        margin: 0 auto;
+    }
+    .popupImg{
+        align-self: center;
+        float: left;
+        width:15%
+    }
+    .popupImg img{
+        width: 120px;
+    }
+    
+    .footer{
+        width: 800px;
+        height: 140px;
+        margin: 0 auto;
+    }
+    .footer p:nth-of-type(1){
+        font-size: 15px;
+        font-weight: 700;
+    }
+    .footer p{
+        font-size: 12px;
+        color: #FEFAF6;
+        margin-top:5px;
+        margin-left: 50px;
+    }
+
+  }
+
+@media screen and (max-width : 576px) {
+    .popup{
+        width: 400px;
+        height: 20px;
+        margin: 0 auto;
+    }
+    .popupImg{
+        align-self: center;
+        float: left;
+        width:15%
+    }
+    .popupImg img{
+        width:61px;
+    }
+    .footerContainer{
+        background-color: #84a89e;
+        height: 150px;
+    }
+    .footer{
+        width: 400px;
+        height: 120px;
+        margin: 10 auto;
+    }
+    .footer p:nth-of-type(1){
+        font-size: 12px;
+        font-weight: 700;
+    }
+    .footer p{
+        font-size: 10px;
+        color: #FEFAF6;
+        margin-top:2px;
+        margin-left: 20px;
+    }
+  }

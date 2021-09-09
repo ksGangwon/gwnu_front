@@ -3,6 +3,7 @@
     z-index: 1;
     height: 500px;
     overflow: hidden;
+    position: relative;
 }
 .mainImgSlide img{
     width: 100%;
@@ -26,8 +27,6 @@
     margin:-80px 0 0 0;
 }
 .noticeBox{
-    display: grid;
-    grid-template-columns: 5fr 5fr;
     background-color: rgb(255, 255, 255);
     margin: 0 auto;
     grid-gap: 50px;
@@ -36,12 +35,15 @@
     height: 350px;
 }
 .notice{
+    float: left;
     margin: 0 auto;
-    width: 90%;
+    width: 50%;
 }
 .noticeTitle{
     font-family: "S-CoreDream-3Light";
     border-bottom: #2B2A29 solid 2px;
+    width: 90%;
+    margin: 0 auto;
 }
 .noticeTitle h4{
     display: inline-block;
@@ -49,15 +51,17 @@
     margin:30px 0 10px 20px;
 }
 .noticeTitle h3{
-    display:block;
+    display: inline-block;
     float: right;
     margin:30px 20px 10px 0;
     font-size:21px;
 }
+
 .noticeUi{
     position: relative;
     font-family: "S-CoreDream-2ExtraLight";
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
 }
 .noticeLi{
     height: 40px;
@@ -78,11 +82,12 @@
     float: right;
     margin-right: 10px;
 }
+
 /*사진 갤러리*/
 .galleryContainer{
     position: relative;
     background-color: #2B2A29;
-    height: 500px;
+    height: 460px;
 }
 .galleryBox{
     width: 1300px;
@@ -95,12 +100,6 @@
     font-family: 'S-CoreDream-9Black';
     color:#FEFAF6;
 }
-.galleryBox h4{
-    margin-top: 10px;
-    text-align: center;
-    font-family: 'S-CoreDream-2ExtraLight';
-    color:#FEFAF6;
-}
 
 .galleryBox img{
     width: 300px;
@@ -108,17 +107,360 @@
     border-radius: 10px;
 }
 
-
-/* 오류시 적용
-.galleryImgSlideContainer{
-    width: 1300px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    overflow: hidden;
-    height: 400px;
+.swiper-slide{
+    position: relative;
 }
-.galleryImgSlide{
-    display:grid;
-    grid-template-columns: repeat(8, 1fr);
-}*/
+
+.galleryImgBox{
+    position: absolute;
+    box-sizing: border-box;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+}
+.galleryTextBox{
+    position:absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 30%;
+    background: rgba(0,0,0,0.7);
+    border-radius: 10px;
+    transition:all 0.5s;
+    
+
+}
+.galleryTextBox h4{
+    position: absolute;
+    bottom: 50px;
+    left: 110px;
+    font-family: 'S-CoreDream-2ExtraLight';
+    color:#FEFAF6;
+}
+.galleryTextBox p{
+    position: absolute;
+    bottom: 20px;
+    left: 105px;
+    font-family: 'S-CoreDream-2ExtraLight';
+    color:#FEFAF6;
+    font-size: 13px;
+
+}
+
+.galleryImgBox:hover .galleryTextBox{
+   opacity: 0;
+   
+}
+
+
+/*반응형 웹*/
+@media screen and (max-width : 992px) {
+.mainImgSlide{
+    z-index: 1;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+}
+.swiper-button-prev{
+    top: 150px;
+}
+.swiper-button-next{
+    top:150px;
+}
+.swiper-pagination{
+    top: 180px;
+}
+
+/*공지사항 & 보도자료*/
+.noticeContainer{
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    margin:-80px 0 0 0;
+}
+.noticeBox{
+    background-color: rgb(255, 255, 255);
+    margin: 0 auto;
+    grid-gap: 50px;
+    width: 800px;
+    border-radius: 30px;
+    height: 200px;
+}
+.notice{
+    float: left;
+    margin: 0 auto;
+    width: 50%;
+}
+.noticeTitle{
+    font-family: "S-CoreDream-3Light";
+    border-bottom: #2B2A29 solid 2px;
+    width: 90%;
+    margin: 0 auto;
+}
+.noticeTitle h4{
+    display: inline-block;
+    font-size: 18px;
+    margin:15px 0 5px 15px;
+}
+.noticeTitle h3{
+    display: inline-block;
+    float: right;
+    font-size:18px;
+    margin:15px 15px 5px 0;
+}
+
+.noticeUi{
+    position: relative;
+    font-family: "S-CoreDream-2ExtraLight";
+    width: 90%;
+    margin: 0 auto;
+}
+.noticeLi{
+    height: 30px;
+    margin: 0;
+    border-bottom: solid gray 0.5px;
+   
+}
+.noticeLi p {
+    float: left;
+    width: 60%;
+    line-height: 30px;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #2B2A29;
+}
+.noticeLi span {
+    float: right;
+    margin-right: 10px;
+    line-height: 30px;
+    font-size: 13px;
+}
+
+/*사진 갤러리*/
+.galleryContainer{
+    position: relative;
+    background-color: #2B2A29;
+    height: 300px;
+}
+.galleryBox{
+    width: 800px;
+    margin: 0 auto;
+   
+}
+.galleryBox h1{
+    padding: 20px 0 15px 0;
+    text-align: center;
+    font-family: 'S-CoreDream-9Black';
+    font-size: 20px;
+    color:#FEFAF6;
+}
+
+.galleryBox img{
+    width: 190px;
+    height: 190px;
+    border-radius: 10px;
+}
+
+.swiper-slide{
+    position: relative;
+}
+
+.galleryImgBox{
+    position: absolute;
+    box-sizing: border-box;
+    width: 190px;
+    height: 190px;
+    overflow: hidden;
+}
+.galleryTextBox{
+    position:absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 40%;
+    background: rgba(0,0,0,0.7);
+    border-radius: 10px;
+    transition:all 0.5s;
+    
+
+}
+.galleryTextBox h4{
+    position: absolute;
+    bottom: 50px;
+    left: 60px;
+    font-family: 'S-CoreDream-2ExtraLight';
+    font-size: 14px;
+    color:#FEFAF6;
+}
+.galleryTextBox p{
+    position: absolute;
+    bottom: 20px;
+    left: 52px;
+    font-family: 'S-CoreDream-2ExtraLight';
+    color:#FEFAF6;
+    font-size: 12px;
+
+}
+
+.galleryImgBox:hover .galleryTextBox{
+   opacity: 0;
+   
+}
+
+  }
+
+@media screen and (max-width : 576px) {
+    .mainImgSlide{
+        z-index: 1;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+    }
+    .swiper-button-prev{
+        display:none
+    }
+    .swiper-button-next{
+        display:none
+    }
+    .swiper-pagination{
+        top: 90px;
+    }
+    
+    /*공지사항 & 보도자료*/
+    .noticeContainer{
+        z-index: 2;
+        position: relative;
+        width: 100%;
+        margin:-80px 0 0 0;
+    }
+    .noticeBox{
+        background-color: rgb(255, 255, 255);
+        margin: 0 auto;
+        grid-gap: 50px;
+        width: 400px;
+        border-radius: 30px;
+        height: 180px;
+    }
+    .notice{
+        float: left;
+        margin: 0 auto;
+        width: 50%;
+    }
+    .noticeTitle{
+        font-family: "S-CoreDream-3Light";
+        border-bottom: #2B2A29 solid 2px;
+        width: 90%;
+        margin: 0 auto;
+    }
+    .noticeTitle h4{
+        display: inline-block;
+        font-size: 15px;
+        margin:15px 0 5px 15px;
+    }
+    .noticeTitle h3{
+        display: inline-block;
+        float: right;
+        font-size:15px;
+        margin:15px 15px 5px 0;
+    }
+    
+    .noticeUi{
+        position: relative;
+        font-family: "S-CoreDream-2ExtraLight";
+        width: 90%;
+        margin: 0 auto;
+    }
+    .noticeLi{
+        height: 30px;
+        margin: 0;
+        border-bottom: solid gray 0.5px;
+       
+    }
+    .noticeLi p {
+        float: left;
+        width: 60%;
+        line-height: 30px;
+        font-size: 10px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        color: #2B2A29;
+    }
+    .noticeLi span {
+        float: right;
+        margin-right: 10px;
+        line-height: 30px;
+        font-size: 10px;
+    }
+    
+    /*사진 갤러리*/
+    .galleryContainer{
+        position: relative;
+        background-color: #2B2A29;
+        height: 190px;
+    }
+    .galleryBox{
+        width: 400px;
+        margin: 0 auto;
+       
+    }
+    .galleryBox h1{
+        padding: 20px 0 15px 0;
+        text-align: center;
+        font-family: 'S-CoreDream-9Black';
+        font-size: 17px;
+        color:#FEFAF6;
+    }
+    
+    .galleryBox img{
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+    }
+    
+    .swiper-slide{
+        position: relative;
+    }
+    
+    .galleryImgBox{
+        position: absolute;
+        box-sizing: border-box;
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+    }
+    .galleryTextBox{
+        position:absolute;
+        bottom: 0px;
+        width: 100%;
+        height: 40%;
+        background: rgba(0,0,0,0.7);
+        border-radius: 10px;
+        transition:all 0.5s;
+        
+    
+    }
+    .galleryTextBox h4{
+        position: absolute;
+        bottom: 25px;
+        left: 25px;
+        font-family: 'S-CoreDream-2ExtraLight';
+        font-size: 10px;
+        color:#FEFAF6;
+    }
+    .galleryTextBox p{
+        position: absolute;
+        bottom: 10px;
+        left: 13px;
+        font-family: 'S-CoreDream-2ExtraLight';
+        color:#FEFAF6;
+        font-size: 7px;
+    
+    }
+    
+    .galleryImgBox:hover .galleryTextBox{
+       opacity: 0;
+       
+    }
+    
+  }

@@ -4,6 +4,12 @@
     position: relative;
     height: 75px;
 }
+.gnbContainer i{
+    display: none;
+    float: right;
+    margin-right: 30px;
+    color: rgb(72, 76, 80);
+}
 .gnbContainer img{
     width: 250px;
     height: 75px;
@@ -16,6 +22,7 @@
     display: flex;
     justify-content: space-around;
 }
+
 .gnbMenuList{
     margin:0 40px;
     font-weight: 500;
@@ -28,6 +35,7 @@
     border-radius: 5px;
     border: #2B2A29 solid 1px;
     background-color: white;
+    padding: 5px 0;
 }
 
 .gnbHiddenUi p{
@@ -37,6 +45,12 @@
     line-height: 55px;
 }
 
+.gnbHiddenContainer{
+    display: none;
+}
+.gnbHiddenMenuUi{
+    display: none;
+}
 
 /*개별 위치 조정*/
 #hiddenUi1{
@@ -109,7 +123,162 @@
 
 .gnbHiddenUi p:hover{
     background-color: #03A396;
+    margin: 0 5px;
     border-radius: 3px;
     font-weight: 900;
     color: #FEFAF6;
 }
+
+
+
+/*반응형 웹*/
+@media screen and (max-width : 992px) {
+    .gnbContainer{
+        width: 800px;
+        margin: 0 auto;
+        position: relative;
+        height: 50px;
+    }
+    .gnbContainer img{
+        width: 160px;
+        height: 50px;
+    }
+    
+    .gnbMenu{
+        display:none
+    }
+    .gnbContainer i{
+        display: inline-block;
+        font-size: 25px;
+        line-height: 50px;
+        
+    }
+    .gnbHiddenContainer{
+        width: 100%;
+        margin:0 auto;
+        position: absolute;
+        top: 42px;
+        left: 0;
+        background: white;
+        z-index: 3;
+        border-radius: 10px;
+    }
+    .gnbHiddenMenuUi{
+        display: inline-block;
+        margin: 20px 5px;
+        padding-left: 30px;
+        box-sizing: border-box;
+    }
+    .gnbHiddenMenuUi h4{
+        width: fit-content;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+        font-size: 13px;
+        border-bottom: #84a89e solid 3px;
+    }
+    .gnbHiddenMenuUi p{
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    /*hover*/
+    .gnbHiddenMenuUi:hover >h4{
+        border-bottom: rgb(255, 165, 165) solid 3px;
+    }
+    .gnbHiddenMenuUi p:hover{
+        background: rgb(255, 165, 165);
+        color: snow;
+        border-radius: 10px;
+    }
+    /*화면 레이아웃 크기*/
+    .col2{
+        float: left;
+        width: 20%
+    }
+    .col4{
+        float: left;
+        width: 25%
+    }
+  }
+
+@media screen and (max-width : 576px) {
+    .gnbContainer{
+        width: 400px;
+        margin: 0 auto;
+        position: relative;
+        height: 40px;
+    }
+    .gnbContainer img{
+        width: 130px;
+        height: 40px;
+    }
+
+    .gnbMenu{
+        display:none
+    }
+
+    .gnbContainer i{
+        display: inline-block;
+        font-size: 20px;
+        line-height: 40px;
+        
+    }
+    .gnbHiddenContainer{
+        width: 100%;
+        margin:0 auto;
+        position: absolute;
+        top: 32px;
+        left: 0;
+        background: white;
+        z-index: 3;
+        border-radius: 10px;
+        
+    }
+    .gnbHiddenMenuUi{
+        display: inline-block;
+        margin: 20px 5px;
+        padding-left: 20px;
+        box-sizing: border-box;
+    }
+    .gnbHiddenMenuUi h4{
+        width: fit-content;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+        font-size: 12px;
+        border-bottom: #84a89e solid 3px;
+    }
+    .gnbHiddenMenuUi p{
+        padding: 10px;
+        font-size: 11px;
+    }
+
+    /*hover*/
+    .gnbHiddenMenuUi:hover >h4{
+        border-bottom: rgb(255, 165, 165) solid 3px;
+    }
+    .gnbHiddenMenuUi p:hover{
+        background: rgb(255, 165, 165);
+        color: snow;
+        border-radius: 10px;
+    }
+
+    /*화면 레이아웃 크기*/
+    .col2{
+        float: left;
+        width: 40%
+    }
+    .col4::after{
+        content: "";
+        display: block;
+        clear: both;
+    }
+    .col4{
+        float: left;
+        width: 55%
+    }
+  }
+
+
+
