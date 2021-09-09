@@ -21,9 +21,10 @@ export async function upload(file){
 }
 
 //게시글 불러오기
-export async function getPost(){
+export async function getPost(page,category){
     console.log('getPost함수 호출됨');
-    const postData = await instance.get("/board", {});
+    console.log("이건ㄴㄴ"+page)
+    const postData = await instance.get("/board", {params:{page:page, category:category}});
     return postData.data;
 }
 
