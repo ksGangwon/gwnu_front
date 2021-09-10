@@ -42,7 +42,7 @@
     margin:0
 }
 .logoutBtn:hover{
-    color: #03A396;
+    cursor:pointer;
 }
 
 

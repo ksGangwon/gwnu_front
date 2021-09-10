@@ -3,9 +3,10 @@ import CommonTable from './CommonTable';
 import CommonTableColumn from './CommonTableColumn';
 import CommonTableRow from './CommonTableRow';
 import postRequest from "../../lib/PostRequest";
+import $ from "jquery";
+import {} from "jquery.cookie";
 import './NoticePage.css';
 
-//test
 class NoticePage extends Component {
 
   constructor(props) {
@@ -14,14 +15,23 @@ class NoticePage extends Component {
         posts:[],
         pages:[],
         pageClicked:0,
-        categoryClicked:"all"
+        categoryClicked:"all",
+        buttonDisplay: "none"
       }; 
   }
 
   componentDidMount(){
+    if ($.cookie("loginData")) {
+      this.setState({
+        buttonDisplay: "inline"
+      });
+    } else {
+      this.setState({
+        buttonDisplay: "none"
+      });
+    }
+
     this.newLoad(this.state.pageClicked,this.state.categoryClicked);
-    var str ="abcdefg"
-    console.log(str)
   }
 
   //카테고리 버튼 이벤트
@@ -109,6 +119,11 @@ class NoticePage extends Component {
   }
 
   render(){
+
+    const buttonStyle = {
+      display: this.state.buttonDisplay
+    };
+
     const postInform = 
     <>
     {this.state.posts.length!==0?(this.state.posts.map((post)=>(
@@ -149,6 +164,7 @@ class NoticePage extends Component {
           <button className={this.state.categoryClicked==="임의 카테고리1"?"categoryClick":"categoryUnClick"} value="임의 카테고리1" onClick={this.categoryClick}>카테고리1</button>
           <button className={this.state.categoryClicked==="임의 카테고리2"?"categoryClick":"categoryUnClick"} value="임의 카테고리2" onClick={this.categoryClick}>카테고리2</button>
           <button className={this.state.categoryClicked==="임의 카테고리3"?"categoryClick":"categoryUnClick"} value="임의 카테고리3" onClick={this.categoryClick}>카테고리3</button>
+          <button className="writeBtn" style={buttonStyle} onClick={()=>window.location.replace("/#/Post")}>글 작성</button>
         </div>
         <CommonTable headersName={['번호', '분류', '제목', '등록일', '글쓴이','조회']}>
           {postInform}
