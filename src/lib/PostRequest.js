@@ -45,7 +45,7 @@ export async function findFile(originalname){
 //
 export async function downloadFile(originalname){
     console.log('downloadFile함수 호출됨');
-    const postData = await instance.post("/board/downloadFile", {originalname});
+    const postData = await instance.post(`/files/${originalname}`);
     return postData.data;
 }
 

@@ -7,7 +7,6 @@ class AttachedFile extends Component {
     console.log(index)
   }
  
-  
   render() {
     const { isModalOn, offModal, files } = this.props;
 

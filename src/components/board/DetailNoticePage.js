@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import postRequest from "../../lib/PostRequest";
+import $ from "jquery";
+import {} from "jquery.cookie";
+import './DetailNoticePage.css';
 
 function PostContents({content}){
   return(
@@ -19,15 +22,27 @@ class DetailNoticePage extends Component {
       datas:[],
       description:"",
       imgCnt:[],
+      buttonDisplay: "none"
     }; 
   }
 
   componentDidMount(){
-    const id = this.props.location.state.id
 
+    if ($.cookie("loginData")) {
+      this.setState({
+        buttonDisplay: "inline"
+      });
+    } else {
+      this.setState({
+        buttonDisplay: "none"
+      });
+    }
+
+    const id = this.props.location.state.id
     const resultBoard = postRequest.getDetail(id);
+
     resultBoard.then(result=>{
-      console.log(result[1][0].originalname)
+
       //description을 제외한 나머지 저장
       this.setState({datas:this.state.datas.concat(result[0])})
 
@@ -71,26 +86,46 @@ class DetailNoticePage extends Component {
 
   }
 
-  download = (e) =>{
+  downloadFile = (e) =>{
     const downloadData = postRequest.downloadFile(e.target.value)
     console.log(downloadData)
   }
+
+  previousPost = () =>{
+
+  }
+
+  afterPost = () =>{
+
+  }
+
+  editPost = (id) =>{
+
+  }
+
+  deletePost = (id) =>{
+
+  }
+
   
   render(){
+
+    const buttonStyle = {
+      display: this.state.buttonDisplay
+    };
+
     const fileInform=
     <>
-      <div>첨부파일</div>
+    <div className="detailFile">
+      첨부파일
       {this.state.files.length!==0?(this.state.files.map((file)=>(
-        <div key={file.id} className="detailFile">
-          {file.originalname.indexOf('png')===-1&&file.originalname.indexOf('jpg')===-1?
-          (<a href={file.url} key={file.url} download>{file.originalname}</a>):
-          <button key={file.url} onClick={this.download} value={file.originalname}>{file.originalname}</button>
-          }
-        </div>))):
-        <div className="detailFile">
-          <div>없음</div>
+        <div className="fileInf">
+          <button key={file.url} onClick={this.downloadFile} value={file.originalname}>{file.originalname}</button>
         </div>
+        ))):
+        <>없음</>
       }
+      </div>
     </>
 
     const postInform=
@@ -99,8 +134,8 @@ class DetailNoticePage extends Component {
           <div className="detailHeader" key={data.id}>
             <div className="detailTitle" key={data.title}>{data.title}</div>
             {fileInform}
-            <div className="detailInf" key={data}><p key="관리자">관리자</p><p key={data.date}>{data.date}</p>조회:{data.inquiry}</div>
-            <PostContents content={this.state.description} key={this.state.description}/>
+            <div className="detailInf" key={data}>관리자 {data.date} 조회:{data.inquiry}</div>
+            <PostContents className="detailContent" content={this.state.description} key={this.state.description}/>
           </div>))):
           <div>
             Loading...
@@ -108,9 +143,16 @@ class DetailNoticePage extends Component {
         }
     </>
     return(
-      <>
+      <div className="detail">
         {postInform}
-      </>
+        <div className="detailFoot">
+        <button onClick={this.editPost} className="editBtn" style={buttonStyle}>수정</button>
+          <button onClick={this.deletePost} className="deleteBtn" style={buttonStyle}>삭제</button>
+          <button onClick={this.previousPost} className="moveBtn1">&lt;</button>
+          <button onClick={this.afterPost} className="moveBtn2">&gt;</button>
+          <button onClick={()=>window.location.replace("/#/page/notion/1")} className="listBtn">목록</button>
+        </div>
+      </div>
     )
   }
 }

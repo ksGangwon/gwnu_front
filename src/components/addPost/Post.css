@@ -1,7 +1,8 @@
 .contentHeader{
-    margin: 25px auto;
+    margin: 30px auto;
     width: 1200px;
     padding-left: 15px;
+    padding-bottom:10px;
     border-bottom: #2B2A29 solid 1px;
 }
 .contentHeader h1{
@@ -21,7 +22,6 @@
     color: #FEFAF6; 
     font-size: 15px;
     height: 35px;
-    margin-top: 20px;
     float:right;
 }
 .contentHeader button:hover{
