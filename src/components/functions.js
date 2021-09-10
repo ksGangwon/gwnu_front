@@ -1,9 +1,10 @@
 import {Link} from 'react-router-dom';
-import DetailNotice from './board/DetailNoticePage';
+import Notice from './board/NoticePage';
 import React, { Component } from "react";
 import NoticeGallery from './NoticeGallery';
 import GalleryWrite from './write/GalleryWrite';
 import "./functions.css"
+import DetailNoticePage from './board/DetailNoticePage';
 
 export function pageLoder(detail, number)
 {
@@ -64,14 +65,13 @@ export function pageLoder(detail, number)
     else{
         switch (number){
             case "1":
-                return <DetailNotice /> ;
+                return <Notice /> ;
             case "2":
                 return "교육 및 사업안내";
             case "3":
                 return "보도자료";
             case "4":
-                return <NoticeGallery />
-                ;
+                return <NoticeGallery />;
             case "5":
                 return "자료실 ";
             case "6":
@@ -82,9 +82,10 @@ export function pageLoder(detail, number)
                 return "보도자료 글쓰기";
             case "9":
                 return <GalleryWrite />;
-                ;
             case "10":
                 return "자료실 글쓰기";
+            // case "11":
+            //     return <DetailNoticePage />;
         }
     }
 }

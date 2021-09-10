@@ -42,11 +42,19 @@ export async function findFile(originalname){
     return postData.data;
 }
 
+//
+export async function downloadFile(originalname){
+    console.log('downloadFile함수 호출됨');
+    const postData = await instance.post("/board/downloadFile", {originalname});
+    return postData.data;
+}
+
 
 export default{
     addPost,
     getPost,
     upload,
     findFile,
-    getDetail
+    getDetail,
+    downloadFile
 }
