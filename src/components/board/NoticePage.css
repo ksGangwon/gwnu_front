@@ -1,0 +1,171 @@
+.commonTable {
+    width: 93%;
+    margin: 0 auto;
+    text-align: center;
+    border-spacing: 0;
+    border-bottom: 1px solid #e8e8e8;
+  }
+   
+  .commonTableHeaderColumn {
+    border-top: 2px solid #1a1a1a;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 0;
+    font-size: 16px;
+    padding: 10px 5px;
+    /* font-weight: bold; */
+  }
+
+  .commonTableRow:hover {
+    cursor: pointer;
+  }
+   
+  .commonTableColumn {
+    padding: 10px 5px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  
+  .categoryList{
+    text-align: left;
+    margin-left: 4%;
+  }
+
+  .bottomBtnList{
+    text-align: center;
+  }
+
+  .categoryClick{
+    margin-right: 15px;
+    margin-bottom: 13px;
+    padding:5px 10px 5px 10px;
+    font-size: 16px;
+    background-color: #FFFFFF;
+    border-radius: 30px;
+    color:#6161bb;
+    border:1px solid #6161bb;
+  }
+  
+  .categoryUnClick{
+    margin-right: 15px;
+    margin-bottom: 13px;
+    padding:5px 10px 5px 10px;
+    font-size: 16px;
+    background-color: #FFFFFF;
+    border-radius: 30px;
+    color:#a5a4a4;
+    border:1px solid #a5a4a4;
+  }
+
+  .pageBtn{
+    margin-right: 5px;
+    margin-top: 20px;
+    padding:5px 7px 5px 7px;
+    font-size: 16px;
+    background-color: #FFFFFF;
+    color:#a5a4a4;
+    border:0px;
+  }
+
+  .pageUnClick{
+    margin-right: 5px;
+    margin-top: 20px;
+    padding:5px 7px 5px 7px;
+    font-size: 16px;
+    background-color: #FFFFFF;
+    color:#a5a4a4;
+    border:0px;
+  }
+
+  .pageClick{
+    margin-right: 5px;
+    margin-top: 20px;
+    padding:5px 7px 5px 7px;
+    font-size: 16px;
+    background-color: #FFFFFF;
+    color:#000000;
+    border:0px;
+  }
+
+  .categoryClick:hover, .categoryUnClick:hover, .pageBtn:hover, .pageClick:hover, .pageUnClick:hover{
+    cursor: pointer;
+  }
+
+
+  
+/*반응형 웹*/
+@media screen and (max-width : 992px) {
+
+  .commonTableHeaderColumn {
+    font-size: 14px;
+    padding: 8px 5px;
+  }
+   
+  .commonTableColumn {
+    padding: 8px 5px;
+    font-size: 13px;
+  }
+
+  .categoryClick{
+    margin-right: 13px;
+    font-size: 13px;
+  }
+  
+  .categoryUnClick{
+    margin-right: 13px;
+    font-size: 13px;
+  }
+
+  .pageBtn{
+    margin-top: 13px;
+    font-size: 13px;
+  }
+
+  .pageUnClick{
+    margin-top: 13px;
+    font-size: 13px;
+  }
+
+  .pageClick{
+    margin-top: 13px;
+    font-size: 13px;
+
+  }
+}
+
+@media screen and (max-width : 576px) {
+  .commonTableHeaderColumn {
+    font-size: 10px;
+    padding: 5px 5px;
+  }
+   
+  .commonTableColumn {
+    padding: 5px 5px;
+    font-size: 10px;
+  }
+
+  .categoryClick{
+    margin-right: 10px;
+    font-size: 10px;
+  }
+  
+  .categoryUnClick{
+    margin-right: 10px;
+    font-size: 10px;
+  }
+
+  .pageBtn{
+    margin-top: 10px;
+    font-size: 10px;
+  }
+
+  .pageUnClick{
+    margin-top: 10px;
+    font-size: 10px;
+  }
+
+  .pageClick{
+    margin-top: 10px;
+    font-size: 10px;
+
+  }
+}
+

@@ -20,6 +20,8 @@ class NoticePage extends Component {
 
   componentDidMount(){
     this.newLoad(this.state.pageClicked,this.state.categoryClicked);
+    var str ="abcdefg"
+    console.log(str)
   }
 
   //카테고리 버튼 이벤트

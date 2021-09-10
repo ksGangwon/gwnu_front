@@ -33,7 +33,7 @@ class Gnb extends Component{
         return(
         <div className="gnbContainer minMax">
             <Link to="/"><img src={process.env.PUBLIC_URL+'/images/logo.png'} alt="산학 융합원 로고"/></Link>
-            <span onClick={this.handleToggle}><i class="fas fa-list"/></span>
+            <span onClick={this.handleToggle}><i className="fas fa-list"/></span>
             <div className="gnbMenu">
                 <div className="gnbMenuList">
                     <Link to="/page/introduce/1">융합원 소개</Link>
