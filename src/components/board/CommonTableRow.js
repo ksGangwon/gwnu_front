@@ -7,8 +7,7 @@ const CommonTableRow = (props) => {
 
   return (
     <tr className="commonTableRow" onClick={() => {history.push({
-      pathname: "/Detail",
-      state: {id: props.id}
+      pathname: `/Detail/${props.id}`
     })}}>
       {
         props.children

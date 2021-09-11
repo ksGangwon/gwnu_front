@@ -3,8 +3,8 @@ import "./AttachedFile.css";
 
 class AttachedFile extends Component {
 
-  removeFile = (index) =>{
-    console.log(index)
+  removeFile = (file) =>{
+    this.props.removeFile(file)
   }
  
   render() {
@@ -27,7 +27,7 @@ class AttachedFile extends Component {
                     <div className="fileContents" key={index}>
                         {file}
                         &nbsp;  &nbsp; &nbsp; &nbsp;
-                        <button className="removeBtn" onClick={()=>{this.removeFile(index)}}>삭제</button>
+                        <button className="removeBtn" onClick={()=>{this.removeFile(file)}}>삭제</button>
                     </div>)
                     ):null
                   }

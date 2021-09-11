@@ -59,6 +59,7 @@ class Post extends Component{
         const { value } = e.target;
         this.setState({title:value})
     };
+    
     handleEditorDataChange= ( event, editor ) => {
         
         let value = editor.getData();
@@ -142,6 +143,12 @@ class Post extends Component{
         })
         document.body.style.overflow = "unset";
     };
+
+    removeFile = (file) =>{
+        let removeFiles = this.state.files.filter((element)=>element!==file)
+        this.setState({files:removeFiles})
+        this.setState({filesCount:this.state.filesCount-1})
+    }
     
     render(){
         const { category } = this.state;
@@ -168,6 +175,7 @@ class Post extends Component{
                             isModalOn={this.state.isModalOn}
                             offModal={this.offModal}
                             files={this.state.files}
+                            removeFile={this.removeFile}
                         />
                         <div className="clear"></div>
                         <input className="titleInput" type='text' placeholder='제목을 입력하세요' onChange={this.getTitle}/>

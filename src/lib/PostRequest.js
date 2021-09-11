@@ -17,6 +17,7 @@ export async function addPost(title, description, category, file, url){
 export async function upload(file){
     console.log('upload함수 호출됨');
     const postData = await ReactS3Client.uploadFile(file,file.name)
+    console.log(postData.location)
     return postData.location;
 }
 
@@ -45,7 +46,7 @@ export async function findFile(originalname){
 //
 export async function downloadFile(originalname){
     console.log('downloadFile함수 호출됨');
-    const postData = await instance.post(`/files/${originalname}`);
+    const postData = await instance.get(`/files/${originalname}`);
     return postData.data;
 }
 

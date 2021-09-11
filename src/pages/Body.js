@@ -19,7 +19,7 @@ class Body extends Component {
         <Route path="/Login" component={Login}></Route>
         <Route path="/Post" component={Post}></Route>
         <Route path="/NoticeGallery" component={NoticeGallery}></Route>
-        <Route path="/Detail" component={DetailNoticePage}></Route>
+        <Route path="/Detail/:id" component={DetailNoticePage}></Route>
       </div>
     );
   }

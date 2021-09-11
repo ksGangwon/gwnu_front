@@ -38,8 +38,8 @@ class DetailNoticePage extends Component {
       });
     }
 
-    const id = this.props.location.state.id
-    const resultBoard = postRequest.getDetail(id);
+    const id = this.props.match.params.id
+    const resultBoard = postRequest.getDetail(id)
 
     resultBoard.then(result=>{
 
@@ -119,8 +119,9 @@ class DetailNoticePage extends Component {
     <div className="detailFile">
       첨부파일
       {this.state.files.length!==0?(this.state.files.map((file)=>(
-        <div className="fileInf">
-          <button key={file.url} onClick={this.downloadFile} value={file.originalname}>{file.originalname}</button>
+        <div className="fileInf" key={file.id}>
+          <a href={file.url} download>{file.originalname}</a>
+          {/* <button key={file.url} onClick={this.downloadFile} value={file.originalname}>{file.originalname}</button> */}
         </div>
         ))):
         <>없음</>
@@ -134,7 +135,7 @@ class DetailNoticePage extends Component {
           <div className="detailHeader" key={data.id}>
             <div className="detailTitle" key={data.title}>{data.title}</div>
             {fileInform}
-            <div className="detailInf" key={data}>관리자 {data.date} 조회:{data.inquiry}</div>
+            <div className="detailInf" key={data.date}>관리자 {data.date} 조회:{data.inquiry}</div>
             <PostContents className="detailContent" content={this.state.description} key={this.state.description}/>
           </div>))):
           <div>
