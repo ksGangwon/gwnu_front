@@ -1,14 +1,13 @@
 .contentHeader{
     margin: 30px auto;
-    width: 1200px;
-    padding-left: 15px;
+    width: 93%;
+    /* padding-left: 15px; */
     padding-bottom:10px;
     border-bottom: #2B2A29 solid 1px;
 }
 .contentHeader h1{
     font-size:25px;
     float:left;
-    width:30%;
 }
 .middle{
     float:left;
@@ -32,7 +31,7 @@
     clear: both;
 }
 .contentMain{
-    margin: 25px auto;
+    margin: 2%;
     width: 1200px;
     padding-left: 15px;
     text-align: left;

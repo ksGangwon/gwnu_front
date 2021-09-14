@@ -5,6 +5,7 @@ import Select from 'react-select';
 import './Post.css'
 import Editor from "./Editor";
 import AttachedFile from "./AttachedFile";
+import { withRouter } from 'react-router-dom';
 import "./ckContent.css";
 
 const options = [
@@ -17,6 +18,7 @@ class Post extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            id:0,
             title: "",
             description:"",
             category:null,
@@ -28,6 +30,22 @@ class Post extends Component{
             isModalOn: false,
           }; 
       }
+
+    //게시물 수정
+    componentDidMount(){
+        console.log(this.props.location)
+        const setCategory = {value:this.props.location.data.category, label:this.props.location.data.category}
+        if(this.props.location.state==="edit"){
+            console.log(this.props.location.data.description)
+            this.setState({id:this.props.location.data.id})
+            this.setState({title:this.props.location.data.title})
+            this.setState({category:setCategory})
+            this.setState({selected:this.props.location.data.category})
+            this.setState({description:this.props.location.data.description})
+        } else{
+            console.log("작성")
+        }
+    }
 
     //게시물 등록 이벤트
     componentDidUpdate(_prevProps,prevState){
@@ -49,7 +67,7 @@ class Post extends Component{
 
     //use react-select
     handleCategory = (category) => {
-        this.setState({ category });
+        this.setState({ category:category });
         this.setState({ selected:category.value });
         console.log(`Option selected:`, category);
       };
@@ -99,7 +117,7 @@ class Post extends Component{
                 let listFile = await postRequest.findFile(file);
                 console.log(listFile)
                 if(listFile.fail){
-                    alert(file+"\n같은 이름의 파일이 서버에 존재합니다. 삭제 후, 파일 이름을 변경해 다시 업로드 해주세요.");
+                    alert(file+"\n같은 이름의 파일이 서버에 존재합니다. 첨부파일 삭제 후, 파일 이름을 변경해 다시 업로드 해주세요.");
                     this.setState({
                         isModalOn: true,
                     })
@@ -107,6 +125,7 @@ class Post extends Component{
                 } else{
                     const resultFile = this.state.filesData.map(async(file)=>{
                         let awsFile = await postRequest.upload(file);
+                        console.log(awsFile);
                         this.setState({
                             urlArray: this.state.urlArray.concat(awsFile),
                         })
@@ -130,6 +149,18 @@ class Post extends Component{
         } 
     };
 
+    updatePost = () =>{
+        const resultPost = postRequest.updatePost(this.state.id,this.state.title,this.state.description,this.state.selected)
+        resultPost.then(result=>{
+            if(result.id!==undefined){
+                alert("게시물 수정 성공")
+                window.location.replace("/#/page/notion/1")
+            } else{
+                alert("게시물 수정에 실패했습니다")
+            }
+        })
+    }
+
     onModal = () => {
         this.setState({
             isModalOn: true,
@@ -145,20 +176,22 @@ class Post extends Component{
     };
 
     removeFile = (file) =>{
-        let removeFiles = this.state.files.filter((element)=>element!==file)
-        this.setState({files:removeFiles})
+        let fileIndex = this.state.files.indexOf(file)
+        this.state.files.splice(fileIndex,1)
+        this.state.filesData.splice(fileIndex,1)
         this.setState({filesCount:this.state.filesCount-1})
     }
     
     render(){
-        const { category } = this.state;
         return(
-
             <div className="contentContainer">
                 <div className="contentHeader">
                     <h1>관리자 글쓰기</h1>
                     <div className="middle"></div>
-                    <button onClick={this.submitPost}>등록</button>
+                    {this.props.location.state==="write"?
+                    (<button onClick={this.submitPost}>등록</button>):
+                    <button onClick={this.updatePost}>등록</button>
+                    }
                     <div className="clear"></div>
                 </div>
 
@@ -166,7 +199,7 @@ class Post extends Component{
                     <div className="contentMain">
                         <Select
                             className="selectCategory"
-                            value={category}
+                            value={this.state.category}
                             placeholder={'카테고리를 선택하세요'}
                             onChange={this.handleCategory} 
                             options={options}/>
@@ -178,8 +211,9 @@ class Post extends Component{
                             removeFile={this.removeFile}
                         />
                         <div className="clear"></div>
-                        <input className="titleInput" type='text' placeholder='제목을 입력하세요' onChange={this.getTitle}/>
+                        <input className="titleInput" type='text' value={this.state.title} placeholder='제목을 입력하세요' onChange={this.getTitle}/>
                         <Editor
+                            data={this.props.location.data.description}
                             onChange={this.handleEditorDataChange}
                         />
                     </div>
@@ -191,4 +225,4 @@ class Post extends Component{
     }
 }
 
-export default Post;
+export default withRouter(Post);

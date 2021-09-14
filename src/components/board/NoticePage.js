@@ -5,6 +5,7 @@ import CommonTableRow from './CommonTableRow';
 import postRequest from "../../lib/PostRequest";
 import $ from "jquery";
 import {} from "jquery.cookie";
+import { withRouter } from 'react-router-dom';
 import './NoticePage.css';
 
 class NoticePage extends Component {
@@ -138,7 +139,9 @@ class NoticePage extends Component {
       <CommonTableRow>
         <CommonTableColumn></CommonTableColumn>
         <CommonTableColumn></CommonTableColumn>
-        <CommonTableColumn>등록된 게시물이 없습니다.</CommonTableColumn>
+        <CommonTableColumn>&nbsp;  &nbsp; &nbsp; &nbsp;
+        &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;
+        등록된 게시물이 없습니다.</CommonTableColumn>
         <CommonTableColumn></CommonTableColumn>
         <CommonTableColumn></CommonTableColumn>
         <CommonTableColumn></CommonTableColumn>
@@ -164,7 +167,7 @@ class NoticePage extends Component {
           <button className={this.state.categoryClicked==="임의 카테고리1"?"categoryClick":"categoryUnClick"} value="임의 카테고리1" onClick={this.categoryClick}>카테고리1</button>
           <button className={this.state.categoryClicked==="임의 카테고리2"?"categoryClick":"categoryUnClick"} value="임의 카테고리2" onClick={this.categoryClick}>카테고리2</button>
           <button className={this.state.categoryClicked==="임의 카테고리3"?"categoryClick":"categoryUnClick"} value="임의 카테고리3" onClick={this.categoryClick}>카테고리3</button>
-          <button className="writeBtn" style={buttonStyle} onClick={()=>window.location.replace("/#/Post")}>글 작성</button>
+          <button className="writeBtn" style={buttonStyle} onClick={()=>this.props.history.push({pathname:"/page/notion/11",state:"write"})}>글 작성</button>
         </div>
         <CommonTable headersName={['번호', '분류', '제목', '등록일', '글쓴이','조회']}>
           {postInform}
@@ -175,4 +178,4 @@ class NoticePage extends Component {
   }
 }
  
-export default NoticePage;
+export default withRouter(NoticePage);

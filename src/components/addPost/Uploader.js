@@ -6,6 +6,7 @@ import FileDialogButtonView from "@ckeditor/ckeditor5-upload/src/ui/filedialogbu
 import FileRepository from "@ckeditor/ckeditor5-upload/src/filerepository";
 import Notification from "@ckeditor/ckeditor5-ui/src/notification/notification";
 import Command from "@ckeditor/ckeditor5-core/src/command";
+import { useState } from "react";
 
 const _UPLOAD_FILE_LIMIT = 50000000;
 
@@ -54,6 +55,7 @@ class FileUploadCommand extends Command {
 // @param {module:engine/model/model~Model} model
 // @param {File} file
 function uploadFile(writer, model, fileRepository, file) {
+  let fileSet = false;
   const loader = fileRepository.createLoader(file);
 
   if (!loader) {
@@ -72,6 +74,12 @@ function uploadFile(writer, model, fileRepository, file) {
       model.document.fire("change:data",file.name)
       
       alert(file.name+"파일이 첨부되었습니다")
+      fileSet = true;
+      if(fileSet === true){
+        model.set('fileName',undefined)
+        model.set('fileData',undefined)
+        fileSet = false;
+      }
     });
 }
 

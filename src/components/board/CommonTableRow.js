@@ -4,15 +4,25 @@ import {useHistory} from "react-router-dom";
 const CommonTableRow = (props) => {
 
   const history = useHistory();
+  const id = props.id;
 
   return (
-    <tr className="commonTableRow" onClick={() => {history.push({
-      pathname: `/Detail/${props.id}`
-    })}}>
-      {
-        props.children
+    <>
+      {id!==undefined?(
+      <tr className="commonTableRow" onClick={() => {history.push({
+        pathname: `/Detail/${id}`
+      })}}>
+        {
+          props.children
+        }
+      </tr>):
+      <tr className="commonTableRow">
+        {
+          props.children
+        }
+      </tr>
       }
-    </tr>
+    </>
   )
 }
  
