@@ -9,6 +9,7 @@ const ReactS3Client = new S3(S3config);
 //게시글 추가
 export async function addPost(title, description, category, file, url){
     console.log('addPost함수 호출됨');
+    console.log(url)
     const postData = await instance.post("/board", {title, description, category, file , url});
     return postData.data;
 }
@@ -45,7 +46,21 @@ export async function findFile(originalname){
 //
 export async function downloadFile(originalname){
     console.log('downloadFile함수 호출됨');
-    const postData = await instance.post(`/files/${originalname}`);
+    const postData = await instance.get(`/files/${originalname}`);
+    return postData.data;
+}
+
+//게시글 수정
+export async function updatePost(id,title,description,category){
+    console.log('updatePost함수 호출됨'+id);
+    const postData = await instance.put(`/board/${id}`,{title,description,category});
+    return postData.data;
+}
+
+//게시글 삭제
+export async function deletePost(id){
+    console.log('deletePost함수 호출됨'+id);
+    const postData = await instance.delete(`/board/${id}`);
     return postData.data;
 }
 
@@ -56,5 +71,7 @@ export default{
     upload,
     findFile,
     getDetail,
-    downloadFile
+    downloadFile,
+    updatePost,
+    deletePost
 }

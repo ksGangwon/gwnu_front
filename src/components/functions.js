@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import NoticeGallery from './NoticeGallery';
 import GalleryWrite from './write/GalleryWrite';
 import "./functions.css"
+import Post from './addPost/Post';
 import DetailNoticePage from './board/DetailNoticePage';
 
 export function pageLoder(detail, number)
@@ -84,9 +85,37 @@ export function pageLoder(detail, number)
                 return <GalleryWrite />;
             case "10":
                 return "자료실 글쓰기";
-            // case "11":
-            //     return <DetailNoticePage />;
+            case "11":
+                return <Post />;
         }
+    }
+}
+
+export function informPageLoder(number)
+{
+    switch (number){
+        case "1":
+            return <DetailNoticePage /> ;
+        case "2":
+            return "교육 및 사업안내";
+        case "3":
+            return "보도자료";
+        case "4":
+            return <NoticeGallery />;
+        case "5":
+            return "자료실 ";
+        case "6":
+            return "공지사항 글쓰기" ;
+        case "7":
+            return "교육 및 사업안내 글쓰기";
+        case "8":
+            return "보도자료 글쓰기";
+        case "9":
+            return <GalleryWrite />;
+        case "10":
+            return "자료실 글쓰기";
+        case "11":
+            return <Post />;
     }
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import postRequest from "../../lib/PostRequest";
 import $ from "jquery";
 import {} from "jquery.cookie";
+import { withRouter } from 'react-router-dom';
 import './DetailNoticePage.css';
 
 function PostContents({content}){
@@ -38,8 +39,8 @@ class DetailNoticePage extends Component {
       });
     }
 
-    const id = this.props.location.state.id
-    const resultBoard = postRequest.getDetail(id);
+    const id = this.props.match.params.id
+    const resultBoard = postRequest.getDetail(id)
 
     resultBoard.then(result=>{
 
@@ -99,12 +100,26 @@ class DetailNoticePage extends Component {
 
   }
 
-  editPost = (id) =>{
-
+  updatePost = () =>{
+    const postData = postRequest.getDetail(this.props.match.params.id)
+    postData.then(result=>{
+      if(result[0].id!="undefined"){
+        this.props.history.push({pathname:"/page/notion/11",state:"edit",data:result[0]})
+      } else{
+        alert("게시물 수정화면으로 이동할 수 없습니다.")
+      }
+    })
   }
 
-  deletePost = (id) =>{
-
+  deletePost = () =>{
+    const postData = postRequest.deletePost(this.props.match.params.id)
+    postData.then(result=>{
+      if(!result.message){
+        window.location.replace("/#/page/notion/1")
+      } else{
+        alert("게시물 삭제 실패했습니다")
+      }
+    })
   }
 
   
@@ -118,12 +133,16 @@ class DetailNoticePage extends Component {
     <>
     <div className="detailFile">
       첨부파일
-      {this.state.files.length!==0?(this.state.files.map((file)=>(
-        <div className="fileInf">
-          <button key={file.url} onClick={this.downloadFile} value={file.originalname}>{file.originalname}</button>
+      {this.state.files.length!==0?(this.state.files.map((file,index)=>(
+        <>
+        <div className="fileInf" key={file.originalname}>
+          <a href={file.url} key={file.url} download> &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; {file.originalname}</a>
+          {/* <button key={file.url} onClick={this.downloadFile} value={file.originalname}>{file.originalname}</button> */}
         </div>
+        <div className="clear" key={index}></div>
+        </>
         ))):
-        <>없음</>
+        <>&nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; 없음</>
       }
       </div>
     </>
@@ -134,7 +153,11 @@ class DetailNoticePage extends Component {
           <div className="detailHeader" key={data.id}>
             <div className="detailTitle" key={data.title}>{data.title}</div>
             {fileInform}
-            <div className="detailInf" key={data}>관리자 {data.date} 조회:{data.inquiry}</div>
+            <div className="detailInf" key={data.date}>
+              <div className="detailDate">관리자 &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;{data.date} </div>
+              <div className="detailInquiry">조회:{data.inquiry}</div>
+              <div className="clear"></div>
+            </div>
             <PostContents className="detailContent" content={this.state.description} key={this.state.description}/>
           </div>))):
           <div>
@@ -146,7 +169,7 @@ class DetailNoticePage extends Component {
       <div className="detail">
         {postInform}
         <div className="detailFoot">
-        <button onClick={this.editPost} className="editBtn" style={buttonStyle}>수정</button>
+          <button onClick={this.updatePost} className="editBtn" style={buttonStyle}>수정</button>
           <button onClick={this.deletePost} className="deleteBtn" style={buttonStyle}>삭제</button>
           <button onClick={this.previousPost} className="moveBtn1">&lt;</button>
           <button onClick={this.afterPost} className="moveBtn2">&gt;</button>
@@ -157,4 +180,4 @@ class DetailNoticePage extends Component {
   }
 }
  
-export default DetailNoticePage;
+export default withRouter(DetailNoticePage);
