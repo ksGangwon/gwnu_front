@@ -4,6 +4,8 @@ import $ from "jquery";
 import {} from "jquery.cookie";
 import { withRouter } from 'react-router-dom';
 import './DetailNoticePage.css';
+import '../DetailPage.css'
+import * as functions from '../functions.js'
 
 function PostContents({content}){
   return(
@@ -121,14 +123,16 @@ class DetailNoticePage extends Component {
   }
 
   previousPost = () =>{
+    const {number, divide}= this.props.match.params;
     this.props.history.push({
-      pathname: `/Detail/${this.props.match.params.divide}/${this.state.prevId}`
+      pathname: `/page/notion/${number}/${divide}/${this.state.prevId}`
     })
   }
 
   afterPost = () =>{
+    const {number, divide}= this.props.match.params;
     this.props.history.push({
-      pathname: `/Detail/${this.props.match.params.divide}/${this.state.afterId}`
+      pathname: `/page/notion/${number}/${divide}/${this.state.afterId}`
     })
   }
 
@@ -197,23 +201,54 @@ class DetailNoticePage extends Component {
           </div>
         }
     </>
+
+    const {detail, number}= this.props.match.params;
+
     return(
-      <div className="detail">
-        {postInform}
-        <div className="detailFoot">
-          <div className="detailList">
-            {this.state.prevTitle!=="이전 글이 없습니다."?(
-              <div className="detailOrder" onClick={this.previousPost}>이전글 &nbsp;  &nbsp; &nbsp; &nbsp; {this.state.prevTitle}</div>):
-              <div className="detailOrder">이전글 &nbsp;  &nbsp; &nbsp; &nbsp; {this.state.prevTitle}</div>
-            }
-            {this.state.afterTitle!=="다음 글이 없습니다."?(
-              <div className="detailOrder" onClick={this.afterPost}>다음글 &nbsp;  &nbsp; &nbsp; &nbsp; {this.state.afterTitle}</div>):
-              <div className="detailOrder">다음글 &nbsp;  &nbsp; &nbsp; &nbsp; {this.state.afterTitle}</div>
-            }
+      <div>
+        <div className="detailHighContainer minMax">
+          <img src={process.env.PUBLIC_URL+"/images/detail/background.jpg"} alt="배경화면"/>
+        <div className="detailHighText">
+            <h1>{functions.pageName(detail)}</h1>
+        </div>
+        </div>
+
+        <div className="detailMenuContainer minMax">
+          <div className="detailMenuBox">
+              <div className="detailMenu">
+                  <p className="detailMenuPtag">{functions.pageName(detail)}</p>
+                  <div className="detailMenuItem">
+                      <p>{functions.pageDetailName(detail, number)}</p>
+                      <img src={process.env.PUBLIC_URL+"/images/detail/bottom_arrow.png"} alt="화살표"/>
+                      <div className="detailMenuUi">
+                          {functions.pageList(detail)}
+                      </div>
+                  </div>
+                  <div className="detailMenuSpace"></div>
+              </div>
           </div>
-          <button onClick={this.updatePost} className="editBtn" style={buttonStyle}>수정</button>
-          <button onClick={this.deletePost} className="deleteBtn" style={buttonStyle}>삭제</button>
-          <button onClick={()=>window.location.replace(`/#/page/notion/${this.props.match.params.divide}`)} className="listBtn">목록</button>
+        </div>
+        <div className="contentContainer minMax">
+          <div className="content">
+            <div className="detail">
+              {postInform}
+              <div className="detailFoot">
+                <div className="detailList">
+                  {this.state.prevTitle!=="이전 글이 없습니다."?(
+                    <div className="detailOrder" onClick={this.previousPost}>이전글 &nbsp;  &nbsp; &nbsp; &nbsp; {this.state.prevTitle}</div>):
+                    <div className="detailOrder">이전글 &nbsp;  &nbsp; &nbsp; &nbsp; {this.state.prevTitle}</div>
+                  }
+                  {this.state.afterTitle!=="다음 글이 없습니다."?(
+                    <div className="detailOrder" onClick={this.afterPost}>다음글 &nbsp;  &nbsp; &nbsp; &nbsp; {this.state.afterTitle}</div>):
+                    <div className="detailOrder">다음글 &nbsp;  &nbsp; &nbsp; &nbsp; {this.state.afterTitle}</div>
+                  }
+                </div>
+                <button onClick={this.updatePost} className="editBtn" style={buttonStyle}>수정</button>
+                <button onClick={this.deletePost} className="deleteBtn" style={buttonStyle}>삭제</button>
+                <button onClick={()=>window.location.replace(`/#/page/notion/${this.props.match.params.divide}`)} className="listBtn">목록</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )

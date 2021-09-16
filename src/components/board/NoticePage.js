@@ -17,7 +17,7 @@ class NoticePage extends Component {
         pages:[],
         pageClicked:0,
         categoryClicked:"all",
-        buttonDisplay: "none"
+        buttonDisplay: "none",
       }; 
   }
 
@@ -40,6 +40,7 @@ class NoticePage extends Component {
         buttonDisplay: "none"
       });
     }
+
     this.newLoad(this.state.pageClicked,this.state.categoryClicked,this.props.divide);
   }
 

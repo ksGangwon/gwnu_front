@@ -5,12 +5,13 @@ const CommonTableRow = (props) => {
 
   const history = useHistory();
   const {id,divide} = props;
+  var number = ''+ divide;
 
   return (
     <>
       {id!==undefined?(
       <tr className="commonTableRow" onClick={() => {history.push({
-        pathname: `/Detail/${divide}/${id}`
+        pathname: `/page/notion/${number}/${divide}/${id}`
       })}}>
         {
           props.children

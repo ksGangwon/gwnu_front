@@ -28,22 +28,33 @@ class Post extends Component{
             urlArray:[],
             filesCount:0,
             isModalOn: false,
+            divideTitle:"공지사항"
           }; 
       }
 
-    //게시물 수정 시, 저장된 데이터 불러옴
     componentDidMount(){
 
+        //게시물 카테고리
+        if(this.props.location.divide===2){
+            this.setState({divideTitle:"교육 및 사업안내"})
+        } else if(this.props.location.divide===3){
+            this.setState({divideTitle:"보도자료"})
+        } else if(this.props.location.divide===4){
+            this.setState({divideTitle:"포토갤러리"})
+        } else if(this.props.location.divide===4){
+            this.setState({divideTitle:"자료실"})
+        }
+
+        //게시물 수정 시, 저장된 데이터 불러옴
         if(this.props.location.state==="edit"){
-            const setCategory = {value:this.props.location.data.category, label:this.props.location.data.category}
-            console.log(this.props.location.data.description)
-            this.setState({id:this.props.location.data.id})
-            this.setState({title:this.props.location.data.title})
+            const {id, title, description, category} = this.props.location.data;
+            const setCategory = {value:category, label:category}
+
+            this.setState({id:id})
+            this.setState({title:title})
             this.setState({category:setCategory})
-            this.setState({selected:this.props.location.data.category})
-            this.setState({description:this.props.location.data.description})
-        } else{
-            console.log("작성")
+            this.setState({selected:category})
+            this.setState({description:description})
         }
     }
 
@@ -107,12 +118,12 @@ class Post extends Component{
         if (this.state.category === null) {
             alert("카테고리를 선택해주세요.");
             return;
-          } else if (this.state.title === "") {
+        } else if (this.state.title === "") {
             alert("제목 입력해주세요.");
             return;
-          } else if(this.state.description === ""){
-              alert("내용을 입력해주세요")
-          }
+        } else if(this.state.description === ""){
+            alert("내용을 입력해주세요")
+        }
 
 
         if(this.state.files.length!==0){
@@ -196,7 +207,7 @@ class Post extends Component{
         return(
             <div className="contentContainer">
                 <div className="contentHeader">
-                    <h1>관리자 글쓰기</h1>
+                    <h1>{this.state.divideTitle} 글쓰기</h1>
                     <div className="middle"></div>
                     {this.props.location.state==="write"?
                     (<button onClick={this.submitPost}>등록</button>):
