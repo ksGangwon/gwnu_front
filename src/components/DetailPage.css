@@ -208,7 +208,7 @@
         left: -2px;
         background-color: white;
         width: 195px;
-        z-index: 2;
+        z-index: 3;
         border: #2B2A29 solid 1px;
     }
     .detailMenuUi p{

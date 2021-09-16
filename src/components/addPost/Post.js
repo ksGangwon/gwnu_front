@@ -31,11 +31,11 @@ class Post extends Component{
           }; 
       }
 
-    //게시물 수정
+    //게시물 수정 시, 저장된 데이터 불러옴
     componentDidMount(){
-        console.log(this.props.location)
-        const setCategory = {value:this.props.location.data.category, label:this.props.location.data.category}
+
         if(this.props.location.state==="edit"){
+            const setCategory = {value:this.props.location.data.category, label:this.props.location.data.category}
             console.log(this.props.location.data.description)
             this.setState({id:this.props.location.data.id})
             this.setState({title:this.props.location.data.title})
@@ -51,12 +51,15 @@ class Post extends Component{
     componentDidUpdate(_prevProps,prevState){
         if(prevState.urlArray.length !== this.state.urlArray.length){
             if(this.state.urlArray.length===this.state.files.length){
-                const resultPost = postRequest.addPost(this.state.title, this.state.description, this.state.selected, this.state.files, this.state.urlArray)
+                const {title,description,selected,files,urlArray} = this.state;
+                const divide = this.props.location.divide;
+
+                const resultPost = postRequest.addPost(title, description, selected, files, urlArray, divide);
                     
                 resultPost.then(result=>{
                     if(result){ 
                         alert("게시물 작성 성공")
-                        window.location.replace("/#/page/notion/1")
+                        window.location.replace(`/#/page/notion/${divide}`)
                     } else {
                         alert("게시물 저장에 실패했습니다")
                     }
@@ -135,13 +138,16 @@ class Post extends Component{
 
 
         } else{
-            const resultPost = postRequest.addPost(this.state.title, this.state.description, this.state.selected, this.state.files, this.state.urlArray)
+            const {title,description,selected,files,urlArray} = this.state;
+            const divide = this.props.location.divide;
+
+            const resultPost = postRequest.addPost(title, description, selected, files, urlArray, divide);
                     
             resultPost.then(result=>{
                 console.log(result)
                 if(result){ 
                     alert("게시물 작성 성공")
-                    window.location.replace("/#/page/notion/1")
+                    window.location.replace(`/#/page/notion/${divide}`)
                 } else {
                     alert("게시물 저장에 실패했습니다")
                 }
@@ -150,11 +156,15 @@ class Post extends Component{
     };
 
     updatePost = () =>{
-        const resultPost = postRequest.updatePost(this.state.id,this.state.title,this.state.description,this.state.selected)
+        const {title,description,selected,files,urlArray} = this.state;
+        const divide = this.props.location.divide;
+        
+        const resultPost = postRequest.updatePost(title, description, selected, files, urlArray);
+            
         resultPost.then(result=>{
             if(result.id!==undefined){
                 alert("게시물 수정 성공")
-                window.location.replace("/#/page/notion/1")
+                window.location.replace(`/#/page/notion/${divide}`)
             } else{
                 alert("게시물 수정에 실패했습니다")
             }
@@ -212,10 +222,15 @@ class Post extends Component{
                         />
                         <div className="clear"></div>
                         <input className="titleInput" type='text' value={this.state.title} placeholder='제목을 입력하세요' onChange={this.getTitle}/>
-                        <Editor
+                        {this.props.location.state==="edit"?(
+                            <Editor
                             data={this.props.location.data.description}
                             onChange={this.handleEditorDataChange}
-                        />
+                            />):
+                            <Editor
+                            onChange={this.handleEditorDataChange}
+                            />
+                        }
                     </div>
             </div>
         </div>
