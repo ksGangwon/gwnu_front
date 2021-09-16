@@ -7,10 +7,9 @@ const instance = axios.create({ baseURL: API_DEFAULT });
 const ReactS3Client = new S3(S3config);
 
 //게시글 추가
-export async function addPost(title, description, category, file, url){
+export async function addPost(title, description, category, file, url, divide){
     console.log('addPost함수 호출됨');
-    console.log(url)
-    const postData = await instance.post("/board", {title, description, category, file , url});
+    const postData = await instance.post("/board", {title, description, category, file , url, divide});
     return postData.data;
 }
 
@@ -22,16 +21,15 @@ export async function upload(file){
 }
 
 //게시글 불러오기
-export async function getPost(page,category){
+export async function getPost(page,category,divide){
     console.log('getPost함수 호출됨');
-    const postData = await instance.get("/board", {params:{page:page, category:category}});
+    const postData = await instance.get("/board", {params:{page:page, category:category,divide:divide}});
     return postData.data;
 }
 
 //게시글 불러오기
-export async function getDetail(id){
-    console.log('getDetail함수 호출됨');
-    const postData = await instance.get(`/board/${id}`);
+export async function getDetail(divide,id){
+    const postData = await instance.get(`/board/${divide}/${id}`);
     return postData.data;
     
 }
@@ -64,6 +62,13 @@ export async function deletePost(id){
     return postData.data;
 }
 
+//이전글, 이후글 출력
+// export async function getOrdered(id,divide){
+//     console.log('getOrdered함수 호출됨'+id);
+//     const postData = await instance.get(`/board/${divide}/${id}`);
+//     return postData.data;
+// }
+
 
 export default{
     addPost,
@@ -73,5 +78,6 @@ export default{
     getDetail,
     downloadFile,
     updatePost,
-    deletePost
+    deletePost,
+    // getOrdered
 }

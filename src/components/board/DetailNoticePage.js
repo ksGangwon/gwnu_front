@@ -4,6 +4,8 @@ import $ from "jquery";
 import {} from "jquery.cookie";
 import { withRouter } from 'react-router-dom';
 import './DetailNoticePage.css';
+import '../DetailPage.css'
+import * as functions from '../functions.js'
 
 function PostContents({content}){
   return(
@@ -23,9 +25,20 @@ class DetailNoticePage extends Component {
       datas:[],
       description:"",
       imgCnt:[],
-      buttonDisplay: "none"
+      buttonDisplay: "none",
+      prevId:0,
+      prevTitle:"이전 글이 없습니다.",
+      afterId:0,
+      afterTitle:"다음 글이 없습니다."
     }; 
   }
+
+  //브라우저 앞뒤버튼, 이전/이후 글 이동 이벤트 
+  componentDidUpdate(_prevProps,prevState){
+    if(_prevProps.match.params.id !== this.props.match.params.id){
+      window.location.reload();
+    }
+  }  
 
   componentDidMount(){
 
@@ -39,15 +52,17 @@ class DetailNoticePage extends Component {
       });
     }
 
-    const id = this.props.match.params.id
-    const resultBoard = postRequest.getDetail(id)
+    const {divide, id} = this.props.match.params;
+    const resultBoard = postRequest.getDetail(divide,id);
 
     resultBoard.then(result=>{
 
-      //description을 제외한 나머지 저장
+      console.log(result)
+
+      // description을 제외한 나머지 저장
       this.setState({datas:this.state.datas.concat(result[0])})
 
-      //description 저장 , img처리
+      // description 저장 , img처리
       var resultDescription = this.foundImg(result[0].description,result[1])
 
       if(result[0].description){
@@ -56,10 +71,25 @@ class DetailNoticePage extends Component {
         this.setState({description:result[0].description})
       }
       
-      //file 저장
+      // file 저장
       for(var i=0; i<result[1].length; i++){
         this.setState({files:this.state.files.concat(result[1][i])})
       }
+
+      // 이전/이후 글 저장
+      if(result[2].length>0){
+        if(result[2][0].id<id){
+          this.setState({prevId:result[2][0].id})
+          this.setState({prevTitle:result[2][0].title})
+          if(result[2].length===2){
+            this.setState({afterId:result[2][1].id})
+            this.setState({afterTitle:result[2][1].title})
+          }
+        } else{
+          this.setState({afterId:result[2][0].id})
+          this.setState({afterTitle:result[2][0].title})
+        }
+      } 
     })
   }
 
@@ -93,18 +123,25 @@ class DetailNoticePage extends Component {
   }
 
   previousPost = () =>{
-
+    const {number, divide}= this.props.match.params;
+    this.props.history.push({
+      pathname: `/page/notion/${number}/${divide}/${this.state.prevId}`
+    })
   }
 
   afterPost = () =>{
-
+    const {number, divide}= this.props.match.params;
+    this.props.history.push({
+      pathname: `/page/notion/${number}/${divide}/${this.state.afterId}`
+    })
   }
 
   updatePost = () =>{
-    const postData = postRequest.getDetail(this.props.match.params.id)
+    const {divide, id} = this.props.match.params;
+    const postData = postRequest.getDetail(divide, id);
     postData.then(result=>{
       if(result[0].id!="undefined"){
-        this.props.history.push({pathname:"/page/notion/11",state:"edit",data:result[0]})
+        this.props.history.push({pathname:"/page/notion/11", state:"edit", divide:this.props.divide, data:result[0]})
       } else{
         alert("게시물 수정화면으로 이동할 수 없습니다.")
       }
@@ -115,14 +152,13 @@ class DetailNoticePage extends Component {
     const postData = postRequest.deletePost(this.props.match.params.id)
     postData.then(result=>{
       if(!result.message){
-        window.location.replace("/#/page/notion/1")
+        window.location.replace(`/#/page/notion/${this.props.match.params.divide}`)
       } else{
         alert("게시물 삭제 실패했습니다")
       }
     })
   }
-
-  
+ 
   render(){
 
     const buttonStyle = {
@@ -155,7 +191,7 @@ class DetailNoticePage extends Component {
             {fileInform}
             <div className="detailInf" key={data.date}>
               <div className="detailDate">관리자 &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;{data.date} </div>
-              <div className="detailInquiry">조회:{data.inquiry}</div>
+              <div className="detailInquiry">조회 {data.inquiry}</div>
               <div className="clear"></div>
             </div>
             <PostContents className="detailContent" content={this.state.description} key={this.state.description}/>
@@ -165,15 +201,54 @@ class DetailNoticePage extends Component {
           </div>
         }
     </>
+
+    const {detail, number}= this.props.match.params;
+
     return(
-      <div className="detail">
-        {postInform}
-        <div className="detailFoot">
-          <button onClick={this.updatePost} className="editBtn" style={buttonStyle}>수정</button>
-          <button onClick={this.deletePost} className="deleteBtn" style={buttonStyle}>삭제</button>
-          <button onClick={this.previousPost} className="moveBtn1">&lt;</button>
-          <button onClick={this.afterPost} className="moveBtn2">&gt;</button>
-          <button onClick={()=>window.location.replace("/#/page/notion/1")} className="listBtn">목록</button>
+      <div>
+        <div className="detailHighContainer minMax">
+          <img src={process.env.PUBLIC_URL+"/images/detail/background.jpg"} alt="배경화면"/>
+        <div className="detailHighText">
+            <h1>{functions.pageName(detail)}</h1>
+        </div>
+        </div>
+
+        <div className="detailMenuContainer minMax">
+          <div className="detailMenuBox">
+              <div className="detailMenu">
+                  <p className="detailMenuPtag">{functions.pageName(detail)}</p>
+                  <div className="detailMenuItem">
+                      <p>{functions.pageDetailName(detail, number)}</p>
+                      <img src={process.env.PUBLIC_URL+"/images/detail/bottom_arrow.png"} alt="화살표"/>
+                      <div className="detailMenuUi">
+                          {functions.pageList(detail)}
+                      </div>
+                  </div>
+                  <div className="detailMenuSpace"></div>
+              </div>
+          </div>
+        </div>
+        <div className="contentContainer minMax">
+          <div className="content">
+            <div className="detail">
+              {postInform}
+              <div className="detailFoot">
+                <div className="detailList">
+                  {this.state.prevTitle!=="이전 글이 없습니다."?(
+                    <div className="detailOrder" onClick={this.previousPost}>이전글 &nbsp;  &nbsp; &nbsp; &nbsp; {this.state.prevTitle}</div>):
+                    <div className="detailOrder">이전글 &nbsp;  &nbsp; &nbsp; &nbsp; {this.state.prevTitle}</div>
+                  }
+                  {this.state.afterTitle!=="다음 글이 없습니다."?(
+                    <div className="detailOrder" onClick={this.afterPost}>다음글 &nbsp;  &nbsp; &nbsp; &nbsp; {this.state.afterTitle}</div>):
+                    <div className="detailOrder">다음글 &nbsp;  &nbsp; &nbsp; &nbsp; {this.state.afterTitle}</div>
+                  }
+                </div>
+                <button onClick={this.updatePost} className="editBtn" style={buttonStyle}>수정</button>
+                <button onClick={this.deletePost} className="deleteBtn" style={buttonStyle}>삭제</button>
+                <button onClick={()=>window.location.replace(`/#/page/notion/${this.props.match.params.divide}`)} className="listBtn">목록</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )

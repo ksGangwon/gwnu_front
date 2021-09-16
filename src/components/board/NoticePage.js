@@ -17,11 +17,20 @@ class NoticePage extends Component {
         pages:[],
         pageClicked:0,
         categoryClicked:"all",
-        buttonDisplay: "none"
+        buttonDisplay: "none",
       }; 
   }
 
+  // 게시판 이동
+  componentDidUpdate(_prevProps,prevState){
+    console.log("안녕"+_prevProps.divide)
+    if(_prevProps.divide !== this.props.divide){
+      window.location.reload();
+    }
+  }   
+
   componentDidMount(){
+
     if ($.cookie("loginData")) {
       this.setState({
         buttonDisplay: "inline"
@@ -32,14 +41,14 @@ class NoticePage extends Component {
       });
     }
 
-    this.newLoad(this.state.pageClicked,this.state.categoryClicked);
+    this.newLoad(this.state.pageClicked,this.state.categoryClicked,this.props.divide);
   }
 
   //카테고리 버튼 이벤트
   categoryClick = (e) =>{
     this.setState({categoryClicked:e.target.value});
     this.setState({pages:[]})
-    this.newLoad(0,e.target.value);
+    this.newLoad(0,e.target.value,this.props.divide);
   }
 
   //페이지 선택 이벤트
@@ -47,7 +56,7 @@ class NoticePage extends Component {
     this.setState({pageClicked:e.target.value});
     this.setState({posts:[]})
 
-    const resultBoard = postRequest.getPost(e.target.value,this.state.categoryClicked);
+    const resultBoard = postRequest.getPost(e.target.value,this.state.categoryClicked,this.props.divide);
     resultBoard.then(result=>{
       for(var i=0;i<result.length;i++){
         this.setState({posts:this.state.posts.concat(result[i])})
@@ -73,8 +82,8 @@ class NoticePage extends Component {
     this.pageLoad(this.state.pages[length],this.state.pages[length])
   }
   
-  newLoad = (page,category) =>{
-    const resultBoard = postRequest.getPost(page,category);
+  newLoad = (page,category,divide) =>{
+    const resultBoard = postRequest.getPost(page,category,divide);
     this.setState({pageClicked:0})
     this.setState({posts:[]})
     var pageNum;
@@ -108,14 +117,14 @@ class NoticePage extends Component {
       this.setState({pageClicked:page})
       this.setState({posts:[]})
 
-      const resultBoard = postRequest.getPost(page,this.state.categoryClicked);
+      const resultBoard = postRequest.getPost(page,this.state.categoryClicked,this.props.divide);
       resultBoard.then(result=>{
         for(var i=0;i<result.length;i++){
           this.setState({posts:this.state.posts.concat(result[i])})
         }
       })
     } else {
-      window.location.replace("/#/page/notion/1")
+      window.location.replace(`/#/page/notion/${this.props.divide}`)
     }
   }
 
@@ -128,7 +137,7 @@ class NoticePage extends Component {
     const postInform = 
     <>
     {this.state.posts.length!==0?(this.state.posts.map((post)=>(
-      <CommonTableRow key={post.id.toString()} id={post.id}>
+      <CommonTableRow key={post.id.toString()} id={post.id} divide={this.props.divide}>
         <CommonTableColumn key={post.number+100}>{post.number}</CommonTableColumn>
         <CommonTableColumn key={post.category}>{post.category}</CommonTableColumn>
         <CommonTableColumn key={post.title}>{post.title}</CommonTableColumn>
@@ -160,15 +169,24 @@ class NoticePage extends Component {
       <button className="pageBtn" onClick={this.finalPage}>&gt; &gt; </button>
     </div>
 
+    const categoryInform=
+    <>
+    {this.props.divide===1?(
+      <div className="categoryList">
+        <button className={this.state.categoryClicked==="all"?"categoryClick":"categoryUnClick"} value="all" onClick={this.categoryClick}>전체</button>
+        <button className={this.state.categoryClicked==="임의 카테고리1"?"categoryClick":"categoryUnClick"} value="임의 카테고리1" onClick={this.categoryClick}>카테고리1</button>
+        <button className={this.state.categoryClicked==="임의 카테고리2"?"categoryClick":"categoryUnClick"} value="임의 카테고리2" onClick={this.categoryClick}>카테고리2</button>
+        <button className={this.state.categoryClicked==="임의 카테고리3"?"categoryClick":"categoryUnClick"} value="임의 카테고리3" onClick={this.categoryClick}>카테고리3</button>
+        <button className="writeBtn" style={buttonStyle} onClick={()=>this.props.history.push({pathname:"/page/notion/11",state:"write",divide:this.props.divide})}>글 작성</button>
+      </div>):
+      <div className="categoryList">
+        <button className="writeBtn" style={buttonStyle} onClick={()=>this.props.history.push({pathname:"/page/notion/11",state:"write",divide:this.props.divide})}>글 작성</button>
+      </div>
+    }
+    </>
     return(
       <>
-        <div className="categoryList">
-          <button className={this.state.categoryClicked==="all"?"categoryClick":"categoryUnClick"} value="all" onClick={this.categoryClick}>전체</button>
-          <button className={this.state.categoryClicked==="임의 카테고리1"?"categoryClick":"categoryUnClick"} value="임의 카테고리1" onClick={this.categoryClick}>카테고리1</button>
-          <button className={this.state.categoryClicked==="임의 카테고리2"?"categoryClick":"categoryUnClick"} value="임의 카테고리2" onClick={this.categoryClick}>카테고리2</button>
-          <button className={this.state.categoryClicked==="임의 카테고리3"?"categoryClick":"categoryUnClick"} value="임의 카테고리3" onClick={this.categoryClick}>카테고리3</button>
-          <button className="writeBtn" style={buttonStyle} onClick={()=>this.props.history.push({pathname:"/page/notion/11",state:"write"})}>글 작성</button>
-        </div>
+        {categoryInform}
         <CommonTable headersName={['번호', '분류', '제목', '등록일', '글쓴이','조회']}>
           {postInform}
         </CommonTable>
