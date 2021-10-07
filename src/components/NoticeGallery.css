@@ -9,10 +9,10 @@
     
   }
   .noticeImage > div{
-    background: #FEFAF6;
+    background: #FFFFFF;
     margin-bottom: 30px;
     padding: 3px 3px 5px 3px;
-    border: solid #2B2A29 1px;
+    border: solid #c9c9c9 0.5px;
     border-radius: 10px;
     overflow: hidden;
   }
@@ -41,10 +41,10 @@
     
   }
   .noticeImage > div{
-    background: #FEFAF6;
+    background: #FFFFFF;
     margin-bottom: 10px;
     padding: 3px 3px 5px 3px;
-    border: solid #2B2A29 1px;
+    border: solid #c9c9c9 0.5px;
     border-radius: 10px;
     overflow: hidden;
   }

@@ -15,6 +15,7 @@ class NoticePage extends Component {
     this.state = {
         posts:[],
         pages:[],
+        pagesNext:[],
         pageClicked:0,
         categoryClicked:"all",
         buttonDisplay: "none",
@@ -23,7 +24,6 @@ class NoticePage extends Component {
 
   // 게시판 이동
   componentDidUpdate(_prevProps,prevState){
-    console.log("안녕"+_prevProps.divide)
     if(_prevProps.divide !== this.props.divide){
       window.location.reload();
     }
@@ -90,7 +90,7 @@ class NoticePage extends Component {
 
     resultBoard.then(result=>{
       var length = result.length;
-
+      console.log(result[0])
       if(result.length>0){
         if(result[0].number%10!==0){
           pageNum = parseInt(result[0].number / 10);
@@ -104,11 +104,19 @@ class NoticePage extends Component {
       for(var i=0;i<length;i++){
         this.setState({posts:this.state.posts.concat(result[i])})
       }
-
-      for(var j=0; j<=pageNum; j++){
-        this.setState({pages:this.state.pages.concat(j)})
+      //page 10개 이상 체크
+      if(pageNum<10){
+        for(var j=0; j<=pageNum; j++){
+          this.setState({pages:this.state.pages.concat(j)})
+        }
+      } else{
+        for(var j=0; j<=10; j++){
+          this.setState({pages:this.state.pages.concat(j)})
+        }
+        for(var k=10; k<=pageNum; k++){
+          this.setState({pagesNext:this.state.pagesNext.concat(k)})
+        }
       }
-      
     })
   }
 
@@ -138,22 +146,22 @@ class NoticePage extends Component {
     <>
     {this.state.posts.length!==0?(this.state.posts.map((post)=>(
       <CommonTableRow key={post.id.toString()} id={post.id} divide={this.props.divide}>
-        <CommonTableColumn key={post.number+100}>{post.number}</CommonTableColumn>
-        <CommonTableColumn key={post.category}>{post.category}</CommonTableColumn>
-        <CommonTableColumn key={post.title}>{post.title}</CommonTableColumn>
-        <CommonTableColumn key={post.date}>{post.date}</CommonTableColumn>
-        <CommonTableColumn key={post.description}>관리자</CommonTableColumn>
-        <CommonTableColumn key={post.inquiry}>{post.inquiry}</CommonTableColumn>
+        <CommonTableColumn key={post.number+100} name="number">{post.number}</CommonTableColumn>
+        <CommonTableColumn key={post.category} name="category">{post.category}</CommonTableColumn>
+        <CommonTableColumn key={post.title} name="title">{post.title}</CommonTableColumn>
+        <CommonTableColumn key={post.date} name="date">{post.date}</CommonTableColumn>
+        <CommonTableColumn key={post.description} name="description">관리자</CommonTableColumn>
+        <CommonTableColumn key={post.inquiry} name="inquiry">{post.inquiry}</CommonTableColumn>
       </CommonTableRow>))):
       <CommonTableRow>
-        <CommonTableColumn></CommonTableColumn>
-        <CommonTableColumn></CommonTableColumn>
-        <CommonTableColumn>&nbsp;  &nbsp; &nbsp; &nbsp;
+        <CommonTableColumn name="number"></CommonTableColumn>
+        <CommonTableColumn name="category"></CommonTableColumn>
+        <CommonTableColumn name="title">&nbsp;  &nbsp; &nbsp; &nbsp;
         &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;
         등록된 게시물이 없습니다.</CommonTableColumn>
-        <CommonTableColumn></CommonTableColumn>
-        <CommonTableColumn></CommonTableColumn>
-        <CommonTableColumn></CommonTableColumn>
+        <CommonTableColumn name="date"></CommonTableColumn>
+        <CommonTableColumn name="description"></CommonTableColumn>
+        <CommonTableColumn name="inquiry"></CommonTableColumn>
       </CommonTableRow>
     }
     </>
@@ -163,7 +171,7 @@ class NoticePage extends Component {
       <button className="pageBtn" onClick={this.firstPage}>&lt; &lt; </button>
       <button className="pageBtn" onClick={this.forwardPage}>&lt; </button>
       {this.state.pages.map((page)=>(
-          <button className={this.state.pageClicked===page?"pageClick":"pageUnClick"} value={page.toString()} key={page.toString()} onClick={this.pageClick}>{page+1}</button>
+        <button className={this.state.pageClicked===page?"pageClick":"pageUnClick"} value={page.toString()} key={page.toString()} onClick={this.pageClick}>{page+1}</button>
       ))}
       <button className="pageBtn" onClick={this.backPage}>&gt; </button>
       <button className="pageBtn" onClick={this.finalPage}>&gt; &gt; </button>
@@ -190,6 +198,13 @@ class NoticePage extends Component {
         <CommonTable headersName={['번호', '분류', '제목', '등록일', '글쓴이','조회']}>
           {postInform}
         </CommonTable>
+        {/* {this.props.divide===1?(
+        
+        ):
+        <CommonTable headersName={['번호', '제목', '등록일', '글쓴이','조회']}>
+          {postInform}
+        </CommonTable>
+        } */}
         {pageInform}
     </>
     )

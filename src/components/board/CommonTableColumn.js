@@ -1,10 +1,13 @@
 import React from 'react';
  
-const CommonTableColumn = ({ children }) => {
+const CommonTableColumn = (props) => {
+
+  const {name} = props;
+
   return (
-    <td className="commonTableColumn">
+    <td className="commonTableColumn" id={name}>
       {
-        children
+        props.children
       }
     </td>
   )

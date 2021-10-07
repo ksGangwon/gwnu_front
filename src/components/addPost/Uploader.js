@@ -17,6 +17,8 @@ const createImageTypeRegExp = (types) => {
   return new RegExp(`^image\\/(${regExpSafeNames.join("|")})$`);
 };
 
+let fileSet = false;
+
 class FileUploadCommand extends Command {
   /**
    * Executes the command.
@@ -55,7 +57,6 @@ class FileUploadCommand extends Command {
 // @param {module:engine/model/model~Model} model
 // @param {File} file
 function uploadFile(writer, model, fileRepository, file) {
-  let fileSet = false;
   const loader = fileRepository.createLoader(file);
 
   if (!loader) {
@@ -111,6 +112,13 @@ class Uploader extends Plugin {
           model.set('fileData',imagesToUpload)
           model.document.fire("change:data","imageLoad")
           alert("이미지 파일이 첨부되었습니다")
+          fileSet = true;
+          if(fileSet === true){
+            model.set('fileName',undefined)
+            model.set('fileData',undefined)
+            fileSet = false;
+          }
+          
         }
 
         if (filesToUpload.length) {

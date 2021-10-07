@@ -57,7 +57,6 @@ class DetailNoticePage extends Component {
 
     resultBoard.then(result=>{
 
-      console.log(result)
 
       // description을 제외한 나머지 저장
       this.setState({datas:this.state.datas.concat(result[0])})
@@ -103,11 +102,8 @@ class DetailNoticePage extends Component {
       if(foundPos == -1) break;
 
       var imgWithSrc = str.slice(foundPos,foundPos+5)
-      console.log(foundPos)
       for(var i=0;i<file.length;i++){
-        console.log(file[i])
         srcImg = "<img src='"+file[i].url+"'/>"
-        console.log(srcImg)
       }
       resultDescription = resultDescription.replace(imgWithSrc,srcImg)
       pos = foundPos +1;
